@@ -14,15 +14,16 @@ class IdeaFlowEventCell: UITableViewCell
     func populate(event: IdeaFlowEvent)
     {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeStyle = .ShortStyle
+        dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .MediumStyle
         
         var endDateString = ""
         if let endDate = event.endTimeStamp
         {
-            endDateString = "- \(endDate)"
+            endDateString = "- \(dateFormatter.stringFromDate(endDate))"
         }
         
-        self.textLabel?.text = "\(event.eventTypeName()) - \(dateFormatter.stringFromDate(event.startTimeStamp))\(endDateString)"
+        self.textLabel?.text = "\(event.eventTypeName())"
+        self.detailTextLabel?.text = "\(dateFormatter.stringFromDate(event.startTimeStamp))\(endDateString)"
     }
 }

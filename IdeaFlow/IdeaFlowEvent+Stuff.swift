@@ -36,12 +36,20 @@ extension IdeaFlowEvent
         }
     }
     
-    func getPrevEvent() -> IdeaFlowEvent?
+    class func getPrevEvent() -> IdeaFlowEvent?
     {
+        if IdeaFlowEvent.MR_numberOfEntities().intValue <= 0 {
+            return nil
+        }
         return IdeaFlowEvent.MR_findFirstOrderedByAttribute("startTimeStamp", ascending: false)
     }
     
     class func createNewEvent(eventType: IdeaFlowEventType) {
+        
+        if let event = getPrevEvent() {
+            event.endTimeStamp = NSDate()
+        }
+        
         let newEvent = IdeaFlowEvent.MR_createEntity()
         newEvent.startTimeStamp = NSDate()
         newEvent.endTimeStamp = nil
