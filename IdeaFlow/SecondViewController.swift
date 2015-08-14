@@ -15,23 +15,25 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var fetchResultsController:NSFetchedResultsController?
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        // Fix the silly thing where the first table cells were hidden under the nav bar
-//        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
-        
-        // Configure the fetch results controller so we can grab core data stuffs
         fetchResultsController = IdeaFlowEvent.MR_fetchAllGroupedBy(nil, withPredicate: nil, sortedBy: "startTimeStamp", ascending: true)
-        
         
         performFetch()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("eventAdded"), name: "New Event", object: nil)
     }
+    
+    override func viewDidDisappear(animated: Bool)
+    {
+        super.viewDidDisappear(animated)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "New Event", object: nil)
+    }
 
-    func performFetch() {
+    func performFetch()
+    {
         var error:NSError?
         fetchResultsController?.performFetch(&error)
         if let error = error
@@ -40,7 +42,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    func eventAdded() {
+    func eventAdded()
+    {
         performFetch()
         tableView.reloadData()
     }
@@ -65,7 +68,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier("IdeaFlowEventCell") as? IdeaFlowEventCell
         
         let ideaFlowEvent = fetchResultsController?.objectAtIndexPath(indexPath) as! IdeaFlowEvent

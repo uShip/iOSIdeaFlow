@@ -8,48 +8,48 @@
 
 import Foundation
 import UIKit
+import MBProgressHUD
 
-class TabBarController : UITabBarController {
+class TabBarController : UITabBarController
+{
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         let button = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("addButtonTapped"))
         self.navigationItem.setRightBarButtonItem(button, animated: false)
     }
     
-    func addButtonTapped() {
+    func addButtonTapped()
+    {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        alert.addAction(UIAlertAction(title: "Troubleshooting", style: .Default, handler: { [weak self] (action) -> Void in
-            self?.createNewEvent(IdeaFlowEventType.Troubleshooting)
+        
+        alert.addAction(UIAlertAction(title: "Troubleshooting", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
+            self?.createEvent(.Troubleshooting)
         }))
+        
         alert.addAction(UIAlertAction(title: "Learning", style: .Default, handler: { [weak self] (action) -> Void in
-            self?.createNewEvent(IdeaFlowEventType.Learning)
+            self?.createEvent(.Learning)
         }))
         alert.addAction(UIAlertAction(title: "Rework", style: .Default, handler: { [weak self] (action) -> Void in
-            self?.createNewEvent(IdeaFlowEventType.Rework)
+            self?.createEvent(.Rework)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("eventAdded"), name: "New Event", object: nil)
     }
     
-    func createNewEvent(eventType: IdeaFlowEventType) {
-        let newEvent = IdeaFlowEvent.MR_createEntity()
-        newEvent.startTimeStamp = NSDate()
-        newEvent.endTimeStamp = nil
-        switch (eventType) {
-            case .Productivity:
-                newEvent.eventType = NSNumber(int: 0)
-            case .Troubleshooting:
-                newEvent.eventType = NSNumber(int: 1)
-            case .Learning:
-                newEvent.eventType = NSNumber(int: 2)
-            case .Rework:
-                newEvent.eventType = NSNumber(int: 3)
-            case .Unknown:
-                newEvent.eventType = NSNumber(int: 4)
-        }
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("New Event", object: self)
+    func createEvent(eventType: IdeaFlowEventType)
+    {
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        IdeaFlowEvent.createNewEvent(eventType)
+    }
+    
+    func eventAdded()
+    {
+        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "New Event", object: nil)
     }
 }

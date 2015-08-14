@@ -8,17 +8,9 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class FirstViewController: UIViewController
+{
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-//        let button = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("addButtonTapped"))
-//        self.navigationItem.setRightBarButtonItem(button, animated: false)
-    }
     
-//    func addButtonTapped() {
-//        
-//    }
 }
 

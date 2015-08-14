@@ -35,4 +35,29 @@ extension IdeaFlowEvent
             return IdeaFlowEventType.Unknown.rawValue
         }
     }
+    
+    func getPrevEvent() -> IdeaFlowEvent?
+    {
+        return IdeaFlowEvent.MR_findFirstOrderedByAttribute("startTimeStamp", ascending: false)
+    }
+    
+    class func createNewEvent(eventType: IdeaFlowEventType) {
+        let newEvent = IdeaFlowEvent.MR_createEntity()
+        newEvent.startTimeStamp = NSDate()
+        newEvent.endTimeStamp = nil
+        switch (eventType) {
+        case .Productivity:
+            newEvent.eventType = NSNumber(int: 0)
+        case .Troubleshooting:
+            newEvent.eventType = NSNumber(int: 1)
+        case .Learning:
+            newEvent.eventType = NSNumber(int: 2)
+        case .Rework:
+            newEvent.eventType = NSNumber(int: 3)
+        case .Unknown:
+            newEvent.eventType = NSNumber(int: 4)
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("New Event", object: self)
+    }
 }
