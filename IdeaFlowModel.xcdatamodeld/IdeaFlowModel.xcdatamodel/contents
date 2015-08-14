@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="IdeaFlowEvent" representedClassName="IdeaFlowEvent" syncable="YES">
+        <attribute name="endTimeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="eventType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="startTimeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="IdeaFlowNote" syncable="YES">
+        <attribute name="noteContent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="IdeaFlowEvent" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="IdeaFlowNote" positionX="-54" positionY="18" width="128" height="75"/>
+    </elements>
+</model>
