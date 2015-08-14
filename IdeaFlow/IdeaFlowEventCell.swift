@@ -17,6 +17,12 @@ class IdeaFlowEventCell: UITableViewCell
         dateFormatter.dateStyle = .ShortStyle
         dateFormatter.timeStyle = .ShortStyle
         
-        self.textLabel?.text = "\(event.eventTypeName()) - \(dateFormatter.stringFromDate(event.timeStamp))"
+        var endDateString = ""
+        if let endDate = event.endTimeStamp
+        {
+            endDateString = "- \(endDate)"
+        }
+        
+        self.textLabel?.text = "\(event.eventTypeName()) - \(dateFormatter.stringFromDate(event.startTimeStamp))\(endDateString)"
     }
 }

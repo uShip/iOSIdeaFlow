@@ -23,7 +23,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 //        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         
         // Configure the fetch results controller so we can grab core data stuffs
-        fetchResultsController = IdeaFlowEvent.MR_fetchAllGroupedBy(nil, withPredicate: nil, sortedBy: "timeStamp", ascending: true)
+        fetchResultsController = IdeaFlowEvent.MR_fetchAllGroupedBy(nil, withPredicate: nil, sortedBy: "startTimeStamp", ascending: true)
         
         
         performFetch()

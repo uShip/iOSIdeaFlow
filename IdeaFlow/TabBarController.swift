@@ -35,7 +35,8 @@ class TabBarController : UITabBarController {
     
     func createNewEvent(eventType: IdeaFlowEventType) {
         let newEvent = IdeaFlowEvent.MR_createEntity()
-        newEvent.timeStamp = NSDate()
+        newEvent.startTimeStamp = NSDate()
+        newEvent.endTimeStamp = nil
         switch (eventType) {
             case .Productivity:
                 newEvent.eventType = NSNumber(int: 0)

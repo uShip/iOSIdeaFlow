@@ -18,11 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         MagicalRecord.setupAutoMigratingCoreDataStack()
-        
-        let newEvent = IdeaFlowEvent.MR_createEntity()
-        newEvent.eventType = NSNumber(int: 0)
-        newEvent.timeStamp = NSDate()
-        
         return true
     }
 

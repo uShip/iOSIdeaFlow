@@ -17,9 +17,10 @@
 		84E2461B1B7E77560042000D /* IdeaFlowModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E246191B7E77560042000D /* IdeaFlowModel.xcdatamodeld */; };
 		84E2461F1B7E82290042000D /* IdeaFlowEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2461E1B7E82290042000D /* IdeaFlowEventCell.swift */; };
 		84E246211B7E82DC0042000D /* IdeaFlowEvent+Stuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E246201B7E82DC0042000D /* IdeaFlowEvent+Stuff.swift */; };
-		84E246261B7E885D0042000D /* IdeaFlowEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E246251B7E885D0042000D /* IdeaFlowEvent.m */; };
 		84E246291B7E8A830042000D /* IdeaFlowChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E246281B7E8A830042000D /* IdeaFlowChartView.swift */; };
 		84E2462B1B7E8C300042000D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2462A1B7E8C300042000D /* TabBarController.swift */; };
+		84E2462F1B7E9DEB0042000D /* IdeaFlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2462D1B7E9DEB0042000D /* IdeaFlowEvent.swift */; };
+		84E246301B7E9DEB0042000D /* IdeaFlowNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2462E1B7E9DEB0042000D /* IdeaFlowNote.swift */; };
 		B7F2A7D67FD665E07D4455A0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DC3E6F8B4DBB9D9AFBE3F6D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -50,11 +51,10 @@
 		84E2461A1B7E77560042000D /* IdeaFlowModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IdeaFlowModel.xcdatamodel; sourceTree = "<group>"; };
 		84E2461E1B7E82290042000D /* IdeaFlowEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowEventCell.swift; sourceTree = "<group>"; };
 		84E246201B7E82DC0042000D /* IdeaFlowEvent+Stuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+Stuff.swift"; sourceTree = "<group>"; };
-		84E246241B7E885D0042000D /* IdeaFlowEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IdeaFlowEvent.h; path = ../IdeaFlowEvent.h; sourceTree = "<group>"; };
-		84E246251B7E885D0042000D /* IdeaFlowEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IdeaFlowEvent.m; path = ../IdeaFlowEvent.m; sourceTree = "<group>"; };
-		84E246271B7E88880042000D /* IdeaFlow_Bridging_Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IdeaFlow_Bridging_Header.h; sourceTree = "<group>"; };
 		84E246281B7E8A830042000D /* IdeaFlowChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowChartView.swift; sourceTree = "<group>"; };
 		84E2462A1B7E8C300042000D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		84E2462D1B7E9DEB0042000D /* IdeaFlowEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowEvent.swift; sourceTree = "<group>"; };
+		84E2462E1B7E9DEB0042000D /* IdeaFlowNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowNote.swift; sourceTree = "<group>"; };
 		DDC5249FD4EEB0EDF331FD76 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,14 +109,13 @@
 		84E245F41B7E74330042000D /* IdeaFlow */ = {
 			isa = PBXGroup;
 			children = (
+				84E2462D1B7E9DEB0042000D /* IdeaFlowEvent.swift */,
+				84E2462E1B7E9DEB0042000D /* IdeaFlowNote.swift */,
 				84E2462C1B7E96EC0042000D /* _Resources */,
 				84E245F51B7E74330042000D /* _Supporting Files */,
 				84E245F71B7E74330042000D /* AppDelegate.swift */,
 				84E245F91B7E74330042000D /* FirstViewController.swift */,
-				84E246271B7E88880042000D /* IdeaFlow_Bridging_Header.h */,
 				84E246281B7E8A830042000D /* IdeaFlowChartView.swift */,
-				84E246241B7E885D0042000D /* IdeaFlowEvent.h */,
-				84E246251B7E885D0042000D /* IdeaFlowEvent.m */,
 				84E246201B7E82DC0042000D /* IdeaFlowEvent+Stuff.swift */,
 				84E2461E1B7E82290042000D /* IdeaFlowEventCell.swift */,
 				84E245FB1B7E74330042000D /* SecondViewController.swift */,
@@ -320,8 +319,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E2462F1B7E9DEB0042000D /* IdeaFlowEvent.swift in Sources */,
 				84E245FC1B7E74330042000D /* SecondViewController.swift in Sources */,
-				84E246261B7E885D0042000D /* IdeaFlowEvent.m in Sources */,
+				84E246301B7E9DEB0042000D /* IdeaFlowNote.swift in Sources */,
 				84E246291B7E8A830042000D /* IdeaFlowChartView.swift in Sources */,
 				84E2462B1B7E8C300042000D /* TabBarController.swift in Sources */,
 				84E245F81B7E74330042000D /* AppDelegate.swift in Sources */,
@@ -411,7 +411,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = IdeaFlow/IdeaFlow_Bridging_Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -451,7 +451,7 @@
 				MODULE_NAME = ideaFlow;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = IdeaFlow/IdeaFlow_Bridging_Header.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

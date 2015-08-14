@@ -5,7 +5,7 @@
         <attribute name="eventType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="startTimeStamp" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
-    <entity name="IdeaFlowNote" syncable="YES">
+    <entity name="IdeaFlowNote" representedClassName="IdeaFlowNote" syncable="YES">
         <attribute name="noteContent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
