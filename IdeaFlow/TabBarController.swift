@@ -30,15 +30,19 @@ class TabBarController : UITabBarController
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
         alert.addAction(UIAlertAction(title: "Troubleshooting", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
-            self?.createEvent(.Troubleshooting)
+            self?.addEvent(.Troubleshooting)
         }))
         
         alert.addAction(UIAlertAction(title: "Learning", style: .Default, handler: { [weak self] (action) -> Void in
-            self?.createEvent(.Learning)
+            self?.addEvent(.Learning)
         }))
         
         alert.addAction(UIAlertAction(title: "Rework", style: .Default, handler: { [weak self] (action) -> Void in
-            self?.createEvent(.Rework)
+            self?.addEvent(.Rework)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Add Dummy Data", style: .Default, handler: { [weak self] (action) -> Void in
+            self?.createDummyEvents()
         }))
         
         alert.addAction(UIAlertAction(title: "Delete All", style: .Destructive, handler: { [weak self] (action) -> Void in
@@ -49,10 +53,17 @@ class TabBarController : UITabBarController
         
     }
     
-    func createEvent(eventType: IdeaFlowEvent.EventType)
+    func addEvent(eventType: IdeaFlowEvent.EventType)
     {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        IdeaFlowEvent.createNewEvent(eventType)
+        IdeaFlowEvent.addNewEvent(eventType)
+    }
+    
+    func createDummyEvents()
+    {
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        IdeaFlowEvent.deleteAllEvents()
+        IdeaFlowEvent.createDummyEvents()
     }
     
     func deleteAllEvents()

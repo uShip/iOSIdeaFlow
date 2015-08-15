@@ -21,7 +21,7 @@ extension CGFloat
     }
 }
 
-private let zoom = CGFloat(0.5)
+private let zoom = CGFloat(1)
 private let hoursPerDay = CGFloat(24)*zoom
 private let minutesPerDay = CGFloat(60*24)*zoom
 private let secondsPerDay = CGFloat(60*60*24)*zoom
@@ -36,9 +36,14 @@ extension NSDate
         let minute = CGFloat(dateComponents?.minute ?? 0)
         let hour = CGFloat(dateComponents?.hour ?? 0)
         
-        let hourPercent = ((hour % hoursPerDay) / hoursPerDay)
-        let minutePercent = ((minute % minutesPerDay) / minutesPerDay)
-        let secondPercent = ((second % secondsPerDay) / secondsPerDay)
+//        let hourPercent = ((hour % hoursPerDay) / hoursPerDay)
+//        let minutePercent = ((minute % minutesPerDay) / minutesPerDay)
+//        let secondPercent = ((second % secondsPerDay) / secondsPerDay)
+
+                let hourPercent = (hour / hoursPerDay)
+                let minutePercent = (minute / minutesPerDay)
+                let secondPercent = (second / secondsPerDay)
+
         
 //        println("   \(hour.noDecimalsFormat()):\(minute.noDecimalsFormat()):\(second.noDecimalsFormat())")
         

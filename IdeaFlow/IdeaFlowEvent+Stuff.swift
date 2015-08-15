@@ -49,7 +49,7 @@ extension IdeaFlowEvent
         switch eventType.integerValue
         {
         case 0:
-            return UIColor.clearColor()
+            return UIColor.whiteColor()
         case 1:
             return UIColor.redColor()
         case 2:
@@ -69,15 +69,21 @@ extension IdeaFlowEvent
         return IdeaFlowEvent.MR_findFirstOrderedByAttribute("startTimeStamp", ascending: false)
     }
     
-    class func createNewEvent(eventType: EventType) {
+    class func addNewEvent(eventType: EventType) {
         
         if let event = getPrevEvent() {
             event.endTimeStamp = NSDate()
         }
         
+        createNewEvent(eventType, startDate: NSDate(), endDate: nil)
+    }
+    
+    class func createNewEvent(eventType: EventType, startDate: NSDate, endDate: NSDate?) {
+        
         let newEvent = IdeaFlowEvent.MR_createEntity()
-        newEvent.startTimeStamp = NSDate()
-        newEvent.endTimeStamp = nil
+        newEvent.startTimeStamp = startDate
+        newEvent.endTimeStamp = endDate
+        
         switch (eventType) {
         case .Productivity:
             newEvent.eventType = NSNumber(int: 0)
@@ -93,6 +99,30 @@ extension IdeaFlowEvent
         NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
         
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.EventAdded.rawValue, object: self)
+    }
+    
+    class func createDummyEvents() {
+        
+        createNewEvent(.Troubleshooting, startDate: _getDate(4, min: 15)!, endDate: _getDate(4, min: 50)!)
+        createNewEvent(.Learning, startDate: _getDate(4, min: 50)!, endDate: _getDate(5, min: 30)!)
+        createNewEvent(.Productivity, startDate: _getDate(5, min: 30)!, endDate: _getDate(8, min: 0)!)
+        createNewEvent(.Rework, startDate: _getDate(8, min: 0)!, endDate: _getDate(8, min: 30)!)
+        
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.EventAdded.rawValue, object: self)
+    }
+    
+    class func _getDate(hour: Int, min: Int) -> NSDate?
+    {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let dateComponents = NSDateComponents()
+        dateComponents.second = 0
+        dateComponents.minute = min
+        dateComponents.hour = hour
+        dateComponents.day = 15
+        dateComponents.month = 8
+        dateComponents.year = 2015
+        return calendar?.dateFromComponents(dateComponents)
     }
     
     class func deleteAllEvents()

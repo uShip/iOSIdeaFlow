@@ -16,9 +16,22 @@ class IdeaFlowChartView2: UIView
     
     override func awakeFromNib()
     {
-        super.awakeFromNib()
-        backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.blackColor()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
+    }
+    
+    deinit
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
+    }
+    
+    func _refresh()
+    {
         
+        println("\nq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)p\n")
+        setNeedsDisplay()
     }
     
     override func drawRect(rect: CGRect)
@@ -71,7 +84,7 @@ class IdeaFlowChartView2: UIView
                     CGContextDrawPath(context, kCGPathStroke)
                     
                     index = index + 1
-                    currentRadius = radius! - index*lineWidth
+//                    currentRadius = radius! - index*lineWidth
                 }
             }
         }
