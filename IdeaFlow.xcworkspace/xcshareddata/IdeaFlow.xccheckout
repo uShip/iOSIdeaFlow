@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>06B5997E-9065-405E-A489-D9700AC59294</string>
+	<key>IDESourceControlProjectName</key>
+	<string>IdeaFlow</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FB6029D32A9304E886338995197575C7D65A5A17</key>
+		<string>bitbucket.org:cruinh/ideaflow.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>IdeaFlow.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FB6029D32A9304E886338995197575C7D65A5A17</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>bitbucket.org:cruinh/ideaflow.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FB6029D32A9304E886338995197575C7D65A5A17</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FB6029D32A9304E886338995197575C7D65A5A17</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IdeaFlow</string>
+		</dict>
+	</array>
+</dict>
+</plist>
