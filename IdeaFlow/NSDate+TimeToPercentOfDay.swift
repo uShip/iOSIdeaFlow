@@ -9,9 +9,22 @@
 import Foundation
 import CoreGraphics
 
-private let hoursPerDay = CGFloat(1)
-private let minutesPerDay = CGFloat(60*hoursPerDay)
-private let secondsPerDay = CGFloat(60*minutesPerDay)
+extension CGFloat
+{
+    func noDecimalsFormat() -> String
+    {
+        return NSString(format: "%0.0f", self) as String
+    }
+    func twoDecimalsFormat() -> String
+    {
+        return NSString(format: "%0.2f", self) as String
+    }
+}
+
+private let zoom = CGFloat(0.5)
+private let hoursPerDay = CGFloat(24)*zoom
+private let minutesPerDay = CGFloat(60*24)*zoom
+private let secondsPerDay = CGFloat(60*60*24)*zoom
 extension NSDate
 {
     func timeToPercentOfDay() -> CGFloat
@@ -24,12 +37,13 @@ extension NSDate
         let hour = CGFloat(dateComponents?.hour ?? 0)
         
         let hourPercent = ((hour % hoursPerDay) / hoursPerDay)
-        let minutePercent = (minute / minutesPerDay)
-        let secondPercent = (second / secondsPerDay)
+        let minutePercent = ((minute % minutesPerDay) / minutesPerDay)
+        let secondPercent = ((second % secondsPerDay) / secondsPerDay)
         
-        println("-- \(hourPercent) \(minutePercent) \(secondPercent)")
+//        println("   \(hour.noDecimalsFormat()):\(minute.noDecimalsFormat()):\(second.noDecimalsFormat())")
         
         let percent = hourPercent + minutePercent + secondPercent
+//        println("   \(hourPercent.twoDecimalsFormat())%h + \(minutePercent.twoDecimalsFormat())%m \(secondPercent.twoDecimalsFormat())%s = \(percent.twoDecimalsFormat())%")
         return percent
     }
 }

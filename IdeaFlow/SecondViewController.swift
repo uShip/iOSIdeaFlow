@@ -24,7 +24,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     {
         super.viewDidLoad()
         fetchResultsController = IdeaFlowEvent.MR_fetchAllGroupedBy(nil, withPredicate: nil, sortedBy: "startTimeStamp", ascending: true)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("eventAdded"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: Selector("eventAdded"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
+        notificationCenter.addObserver(self, selector: Selector("eventsDeleted"), name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
     }
     
     override func viewWillAppear(animated: Bool)
@@ -50,6 +52,11 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func eventAdded()
+    {
+        refresh()
+    }
+    
+    func eventsDeleted()
     {
         refresh()
     }
