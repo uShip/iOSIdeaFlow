@@ -3,14 +3,17 @@
     <entity name="IdeaFlowEvent" representedClassName="IdeaFlowEvent" syncable="YES">
         <attribute name="endTimeStamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="eventType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startTimeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IdeaFlowNote" inverseName="event" inverseEntity="IdeaFlowNote" syncable="YES"/>
     </entity>
     <entity name="IdeaFlowNote" representedClassName="IdeaFlowNote" syncable="YES">
         <attribute name="noteContent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IdeaFlowEvent" inverseName="notes" inverseEntity="IdeaFlowEvent" syncable="YES"/>
     </entity>
     <elements>
-        <element name="IdeaFlowEvent" positionX="-63" positionY="-18" width="128" height="90"/>
-        <element name="IdeaFlowNote" positionX="-54" positionY="18" width="128" height="75"/>
+        <element name="IdeaFlowEvent" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="IdeaFlowNote" positionX="-54" positionY="18" width="128" height="90"/>
     </elements>
 </model>

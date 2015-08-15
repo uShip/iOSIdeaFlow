@@ -91,5 +91,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         return cell!
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? IdeaFlowEventDetailsViewController, cell = sender as? IdeaFlowEventCell
+        {
+            destination.eventIdentifier = cell.eventIdentifier
+        }
+    }
 }
 

@@ -11,8 +11,12 @@ import UIKit
 
 class IdeaFlowEventCell: UITableViewCell
 {
+    var eventIdentifier:String?
+    
     func populate(event: IdeaFlowEvent)
     {
+        eventIdentifier = event.identifier
+        
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .MediumStyle

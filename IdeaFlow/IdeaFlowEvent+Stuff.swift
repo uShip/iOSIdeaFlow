@@ -83,6 +83,7 @@ extension IdeaFlowEvent
         let newEvent = IdeaFlowEvent.MR_createEntity()
         newEvent.startTimeStamp = startDate
         newEvent.endTimeStamp = endDate
+        newEvent.identifier = NSUUID().UUIDString
         
         switch (eventType) {
         case .Productivity:
