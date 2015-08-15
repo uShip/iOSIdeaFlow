@@ -7,32 +7,57 @@
 //
 
 import Foundation
-
-enum IdeaFlowEventType: String
-{
-    case Productivity = "Productivity"
-    case Troubleshooting = "Troubleshooting"
-    case Learning = "Learning"
-    case Rework = "Rework"
-    case Unknown = "Unknown"
-}
+import UIKit
+import CoreData
 
 extension IdeaFlowEvent
 {
+    enum EventType: String
+    {
+        case Productivity = "Productivity"
+        case Troubleshooting = "Troubleshooting"
+        case Learning = "Learning"
+        case Rework = "Rework"
+        case Unknown = "Unknown"
+    }
+    
+    enum Notifications : String
+    {
+        case EventAdded = "Event Added"
+        case AllEventsDeleted = "All Events Deleted"
+    }
+    
     func eventTypeName() -> String
     {
         switch eventType.integerValue
         {
         case 0:
-            return IdeaFlowEventType.Productivity.rawValue
+            return EventType.Productivity.rawValue
         case 1:
-            return IdeaFlowEventType.Troubleshooting.rawValue
+            return EventType.Troubleshooting.rawValue
         case 2:
-            return IdeaFlowEventType.Learning.rawValue
+            return EventType.Learning.rawValue
         case 3:
-            return IdeaFlowEventType.Rework.rawValue
+            return EventType.Rework.rawValue
         default:
-            return IdeaFlowEventType.Unknown.rawValue
+            return EventType.Unknown.rawValue
+        }
+    }
+    
+    func eventTypeColor() -> UIColor
+    {
+        switch eventType.integerValue
+        {
+        case 0:
+            return UIColor.clearColor()
+        case 1:
+            return UIColor.redColor()
+        case 2:
+            return UIColor.purpleColor()
+        case 3:
+            return UIColor.orangeColor()
+        default:
+            return UIColor.magentaColor()
         }
     }
     
@@ -44,7 +69,7 @@ extension IdeaFlowEvent
         return IdeaFlowEvent.MR_findFirstOrderedByAttribute("startTimeStamp", ascending: false)
     }
     
-    class func createNewEvent(eventType: IdeaFlowEventType) {
+    class func createNewEvent(eventType: EventType) {
         
         if let event = getPrevEvent() {
             event.endTimeStamp = NSDate()
@@ -65,7 +90,16 @@ extension IdeaFlowEvent
         case .Unknown:
             newEvent.eventType = NSNumber(int: 4)
         }
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
         
-        NSNotificationCenter.defaultCenter().postNotificationName("New Event", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.EventAdded.rawValue, object: self)
+    }
+    
+    class func deleteAllEvents()
+    {
+        IdeaFlowEvent.MR_truncateAll()
+        NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.AllEventsDeleted.rawValue, object: self)
     }
 }

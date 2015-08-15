@@ -52,7 +52,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IdeaFlowEventCell" textLabel="g7J-3t-vy8" detailTextLabel="kIv-ZH-Tzk" style="IBUITableViewCellStyleSubtitle" id="pej-dm-c7X" customClass="IdeaFlowEventCell" customModule="IdeaFlow" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="IdeaFlowEventCell" textLabel="g7J-3t-vy8" detailTextLabel="kIv-ZH-Tzk" style="IBUITableViewCellStyleSubtitle" id="pej-dm-c7X" customClass="IdeaFlowEventCell" customModule="IdeaFlow" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pej-dm-c7X" id="bVW-hT-0wO">

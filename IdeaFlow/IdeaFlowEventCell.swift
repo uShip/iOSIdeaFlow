@@ -23,7 +23,11 @@ class IdeaFlowEventCell: UITableViewCell
             endDateString = "- \(dateFormatter.stringFromDate(endDate))"
         }
         
-        self.textLabel?.text = "\(event.eventTypeName())"
-        self.detailTextLabel?.text = "\(dateFormatter.stringFromDate(event.startTimeStamp))\(endDateString)"
+        textLabel?.text = "\(event.eventTypeName())"
+        detailTextLabel?.text = "\(dateFormatter.stringFromDate(event.startTimeStamp))\(endDateString)"
+        
+        backgroundColor = event.eventTypeColor()
+        textLabel?.textColor = backgroundColor?.inverseColor()
+        detailTextLabel?.textColor = backgroundColor?.inverseColor()
     }
 }

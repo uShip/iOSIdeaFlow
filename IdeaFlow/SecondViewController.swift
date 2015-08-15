@@ -15,21 +15,28 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var fetchResultsController:NSFetchedResultsController?
     
+    deinit
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         fetchResultsController = IdeaFlowEvent.MR_fetchAllGroupedBy(nil, withPredicate: nil, sortedBy: "startTimeStamp", ascending: true)
-        
-        performFetch()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("eventAdded"), name: "New Event", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("eventAdded"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
     }
     
-    override func viewDidDisappear(animated: Bool)
+    override func viewWillAppear(animated: Bool)
     {
-        super.viewDidDisappear(animated)
-        
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "New Event", object: nil)
+        super.viewWillAppear(animated)
+        refresh()
+    }
+    
+    func refresh()
+    {
+        performFetch()
+        tableView.reloadData()
     }
 
     func performFetch()
@@ -44,8 +51,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func eventAdded()
     {
-        performFetch()
-        tableView.reloadData()
+        refresh()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int
