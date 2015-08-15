@@ -10,7 +10,37 @@ import UIKit
 
 class FirstViewController: UIViewController
 {
-
+    @IBOutlet weak var previousDate: UIButton!
+    @IBOutlet weak var currentDate: UILabel!
+    @IBOutlet weak var nextDate: UIButton!
     
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        refreshDateLabel()
+    }
+    
+    
+    @IBAction func goToNextDay(sender: AnyObject)
+    {
+        IdeaFlowEvent.setSelectedDayWithOffset(1)
+        refreshDateLabel()
+    }
+    
+    @IBAction func goToPreviousDay(sender: AnyObject)
+    {
+        IdeaFlowEvent.setSelectedDayWithOffset(-1)
+        refreshDateLabel()
+    }
+    
+    func refreshDateLabel()
+    {
+        let selectedDate = IdeaFlowEvent.getSelectedDate()
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .ShortStyle
+        dateFormatter.timeStyle = .NoStyle
+        
+        currentDate.text = dateFormatter.stringFromDate(selectedDate)
+    }
 }
-

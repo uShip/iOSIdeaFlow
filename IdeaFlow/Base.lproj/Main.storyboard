@@ -18,19 +18,60 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTC-FJ-TdB" customClass="IdeaFlowChartView2" customModule="IdeaFlow" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="600" height="531"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6S-sf-6Ed" userLabel="Previous Day">
+                                <rect key="frame" x="16" y="80" width="30" height="30"/>
+                                <state key="normal" title="&lt;">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToPreviousDay:" destination="9pv-A4-QxB" eventType="touchUpInside" id="omN-Em-FH9"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLM-tA-2iQ" userLabel="Date">
+                                <rect key="frame" x="279" y="80" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7jg-gd-hKE" userLabel="Next Day">
+                                <rect key="frame" x="554" y="80" width="30" height="30"/>
+                                <state key="normal" title="&gt;">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToNextDay:" destination="9pv-A4-QxB" eventType="touchUpInside" id="7at-mU-hPB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="K6S-sf-6Ed" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="16" id="86e-IJ-d4N"/>
+                            <constraint firstItem="K6S-sf-6Ed" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="16" id="CZf-pl-dtd"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="uTC-FJ-TdB" secondAttribute="bottom" id="DkD-tM-byh"/>
+                            <constraint firstItem="7jg-gd-hKE" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="16" id="ThI-xO-7vE"/>
+                            <constraint firstItem="KLM-tA-2iQ" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="16" id="Y4b-KH-m1Y"/>
                             <constraint firstItem="uTC-FJ-TdB" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="a9g-wu-HNH"/>
                             <constraint firstItem="uTC-FJ-TdB" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="aax-rB-Wmk"/>
+                            <constraint firstAttribute="centerX" secondItem="KLM-tA-2iQ" secondAttribute="centerX" id="reQ-ay-umN"/>
+                            <constraint firstAttribute="trailing" secondItem="7jg-gd-hKE" secondAttribute="trailing" constant="16" id="wB7-CN-rjO"/>
                             <constraint firstAttribute="trailing" secondItem="uTC-FJ-TdB" secondAttribute="trailing" id="wDz-LO-iGw"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="I8W-a7-qh2"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="currentDate" destination="KLM-tA-2iQ" id="9ge-Ei-tO3"/>
+                        <outlet property="nextDate" destination="7jg-gd-hKE" id="S81-Ei-MgH"/>
+                        <outlet property="previousDate" destination="K6S-sf-6Ed" id="6yX-Y1-FPC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>

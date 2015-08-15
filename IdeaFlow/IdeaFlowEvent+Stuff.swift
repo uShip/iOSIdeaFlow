@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import CoreData
 
+private var selectedDate: NSDate?
+
 extension IdeaFlowEvent
 {
     enum EventType: String
@@ -25,6 +27,75 @@ extension IdeaFlowEvent
     {
         case EventAdded = "Event Added"
         case AllEventsDeleted = "All Events Deleted"
+        case SelectedDateChanged = "Selected Date Changed"
+    }
+    
+    class func selectedDayMidnight() -> NSDate?
+    {
+        let today = getSelectedDate().dayComponents()
+        
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let dateComponents = NSDateComponents()
+        dateComponents.second = 0
+        dateComponents.minute = 0
+        dateComponents.hour = 0
+        dateComponents.day = today.day
+        dateComponents.month = today.month
+        dateComponents.year = today.year
+        return calendar?.dateFromComponents(dateComponents)
+    }
+    
+    class func selectedDayBeforeMidnight() -> NSDate?
+    {
+        let today = getSelectedDate().dayComponents()
+        
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let dateComponents = NSDateComponents()
+        dateComponents.second = 59
+        dateComponents.minute = 59
+        dateComponents.hour = 23
+        dateComponents.day = today.day
+        dateComponents.month = today.month
+        dateComponents.year = today.year
+        return calendar?.dateFromComponents(dateComponents)
+    }
+    
+    class func selectedDayWithOffset(offset: Int) -> NSDate?
+    {
+        let dateComponents = NSDateComponents()
+        dateComponents.day = offset
+        
+        let calendar = NSCalendar.currentCalendar()
+        return calendar.dateByAddingComponents(dateComponents, toDate: getSelectedDate(), options: NSCalendarOptions(0))
+    }
+    
+    class func setSelectedDayWithOffset(offset: Int)
+    {
+        if let newDay = selectedDayWithOffset(offset)
+        {
+            setSelectedDate(newDay)
+        }
+    }
+    
+    class func getSelectedDate() -> NSDate
+    {
+        if selectedDate == nil
+        {
+            selectedDate = NSDate()
+        }
+        return selectedDate!
+    }
+    
+    class func setSelectedDate(newDate: NSDate)
+    {
+        selectedDate = newDate
+        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.SelectedDateChanged.rawValue, object: self)
+    }
+    
+    class func getEventsForSelectedDate() -> [IdeaFlowEvent]?
+    {
+        let predicate = NSPredicate(format:"%@ <= startTimeStamp AND %@ > endTimeStamp", selectedDayMidnight()!, selectedDayBeforeMidnight()!)
+        return IdeaFlowEvent.MR_findAllWithPredicate(predicate) as? [IdeaFlowEvent]
     }
     
     func eventTypeName() -> String
@@ -104,16 +175,21 @@ extension IdeaFlowEvent
     
     class func createDummyEvents() {
         
-        createNewEvent(.Troubleshooting, startDate: _getDate(4, min: 15)!, endDate: _getDate(4, min: 50)!)
-        createNewEvent(.Learning, startDate: _getDate(4, min: 50)!, endDate: _getDate(5, min: 30)!)
-        createNewEvent(.Productivity, startDate: _getDate(5, min: 30)!, endDate: _getDate(8, min: 0)!)
-        createNewEvent(.Rework, startDate: _getDate(8, min: 0)!, endDate: _getDate(8, min: 30)!)
+        createNewEvent(.Troubleshooting, startDate: _getTodayDate(1, min: 15)!, endDate: _getTodayDate(1, min: 50)!)
+        createNewEvent(.Learning, startDate: _getTodayDate(1, min: 50)!, endDate: _getTodayDate(5, min: 30)!)
+        createNewEvent(.Rework, startDate: _getTodayDate(5, min: 30)!, endDate: _getTodayDate(5, min: 45)!)
+        createNewEvent(.Learning, startDate: _getTodayDate(5, min: 45)!, endDate: _getTodayDate(20, min: 30)!)
+        
+        createNewEvent(.Troubleshooting, startDate: _getTomorrowDate(4, min: 15)!, endDate: _getTomorrowDate(4, min: 50)!)
+        createNewEvent(.Learning, startDate: _getTomorrowDate(4, min: 50)!, endDate: _getTomorrowDate(5, min: 30)!)
+        createNewEvent(.Productivity, startDate: _getTomorrowDate(5, min: 30)!, endDate: _getTomorrowDate(8, min: 0)!)
+        createNewEvent(.Rework, startDate: _getTomorrowDate(8, min: 0)!, endDate: _getTomorrowDate(8, min: 30)!)
         
         NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.EventAdded.rawValue, object: self)
     }
     
-    class func _getDate(hour: Int, min: Int) -> NSDate?
+    class func _getTodayDate(hour: Int, min: Int) -> NSDate?
     {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let dateComponents = NSDateComponents()
@@ -121,6 +197,19 @@ extension IdeaFlowEvent
         dateComponents.minute = min
         dateComponents.hour = hour
         dateComponents.day = 15
+        dateComponents.month = 8
+        dateComponents.year = 2015
+        return calendar?.dateFromComponents(dateComponents)
+    }
+    
+    class func _getTomorrowDate(hour: Int, min: Int) -> NSDate?
+    {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let dateComponents = NSDateComponents()
+        dateComponents.second = 0
+        dateComponents.minute = min
+        dateComponents.hour = hour
+        dateComponents.day = 16
         dateComponents.month = 8
         dateComponents.year = 2015
         return calendar?.dateFromComponents(dateComponents)

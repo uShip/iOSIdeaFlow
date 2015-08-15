@@ -8,6 +8,14 @@
 
 import UIKit
 
+extension CGFloat
+{
+    func degreesToRadians() -> CGFloat
+    {
+        return self * CGFloat(0.0174532925)//CGFloat(M_PI) / CGFloat(180)
+    }
+}
+
 class IdeaFlowChartView2: UIView
 {
     let lineWidth = CGFloat(5)
@@ -19,12 +27,12 @@ class IdeaFlowChartView2: UIView
         self.backgroundColor = UIColor.blackColor()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.SelectedDateChanged.rawValue, object: nil)
     }
     
     deinit
     {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func _refresh()
@@ -45,7 +53,6 @@ class IdeaFlowChartView2: UIView
         drawEventRings(context)
         drawQuarterHourMarkers(context,hours:hours)
         drawHoursText(context, rect: rect, x: centerPoint!.x, y: centerPoint!.y, radius: radius!, sides: hours, color: UIColor.whiteColor())
-//        drawCross(context)
     }
     
     private func drawCross(context: CGContextRef)
@@ -74,7 +81,7 @@ class IdeaFlowChartView2: UIView
     
     private func drawEventRings(context: CGContextRef)
     {
-        if let events = IdeaFlowEvent.MR_findAll() as? [IdeaFlowEvent]
+        if let events = IdeaFlowEvent.getEventsForSelectedDate()
         {
             var index : CGFloat = 0
             var currentRadius : CGFloat = radius!
