@@ -45,10 +45,20 @@ class IdeaFlowChartView2: UIView
         drawEventRings(context)
         drawQuarterHourMarkers(context,hours:hours)
         drawHoursText(context, rect: rect, x: centerPoint!.x, y: centerPoint!.y, radius: radius!, sides: hours, color: UIColor.whiteColor())
+//        drawCross(context)
     }
     
     private func drawCross(context: CGContextRef)
     {
+        // save the original position and origin
+        CGContextSaveGState(context)
+        // make translation
+        CGContextTranslateCTM(context, (-centerPoint!.x / 2), (centerPoint!.x * 2) + (centerPoint!.y - centerPoint!.x))
+        // make rotation
+        let degrees = CGFloat(-90)
+        CGContextRotateCTM(context, degrees.degreesToRadians())
+        
+        
         CGContextMoveToPoint(context, centerPoint!.x, 0)
         CGContextAddLineToPoint(context, centerPoint!.x, bounds.height)
         CGContextMoveToPoint(context, 0, centerPoint!.y)
@@ -57,6 +67,9 @@ class IdeaFlowChartView2: UIView
         CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
         CGContextSetLineWidth(context, 0.5)
         CGContextDrawPath(context, kCGPathStroke)
+        
+        // restore state before next translation
+        CGContextRestoreGState(context)
     }
     
     private func drawEventRings(context: CGContextRef)
@@ -65,6 +78,15 @@ class IdeaFlowChartView2: UIView
         {
             var index : CGFloat = 0
             var currentRadius : CGFloat = radius!
+            
+            // save the original position and origin
+            CGContextSaveGState(context)
+            // make translation
+            CGContextTranslateCTM(context, (-centerPoint!.x / 2), (centerPoint!.x * 2) + (centerPoint!.y - centerPoint!.x))
+            // make rotation
+            let degrees = CGFloat(-90)
+            CGContextRotateCTM(context, degrees.degreesToRadians())
+            
             for event in events
             {
                 if event.endTimeStamp != nil
@@ -84,9 +106,11 @@ class IdeaFlowChartView2: UIView
                     CGContextDrawPath(context, kCGPathStroke)
                     
                     index = index + 1
-//                    currentRadius = radius! - index*lineWidth
                 }
             }
+            
+            // restore state before next translation
+            CGContextRestoreGState(context)
         }
     }
     
