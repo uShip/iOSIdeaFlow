@@ -29,6 +29,10 @@ class TabBarController : UITabBarController
     {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
+        alert.addAction(UIAlertAction(title: "Productivity", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
+            self?.addEvent(.Productivity)
+        }))
+        
         alert.addAction(UIAlertAction(title: "Troubleshooting", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
             self?.addEvent(.Troubleshooting)
         }))
