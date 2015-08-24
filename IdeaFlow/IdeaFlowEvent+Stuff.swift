@@ -173,45 +173,53 @@ extension IdeaFlowEvent
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.EventAdded.rawValue, object: self)
     }
     
-    class func createDummyEvents() {
+    class func createDummyEvents()
+    {
         
-        createNewEvent(.Troubleshooting, startDate: _getTodayDate(1, min: 15)!, endDate: _getTodayDate(1, min: 50)!)
-        createNewEvent(.Learning, startDate: _getTodayDate(1, min: 50)!, endDate: _getTodayDate(5, min: 30)!)
-        createNewEvent(.Rework, startDate: _getTodayDate(5, min: 30)!, endDate: _getTodayDate(5, min: 45)!)
-        createNewEvent(.Learning, startDate: _getTodayDate(5, min: 45)!, endDate: _getTodayDate(20, min: 30)!)
+        createNewEvent(.Troubleshooting, startDate: _getTodayDateWithTime(1, minute: 15)!, endDate: _getTodayDateWithTime(1, minute: 50)!)
+        createNewEvent(.Learning, startDate: _getTodayDateWithTime(1, minute: 50)!, endDate: _getTodayDateWithTime(5, minute: 30)!)
+        createNewEvent(.Rework, startDate: _getTodayDateWithTime(5, minute: 30)!, endDate: _getTodayDateWithTime(5, minute: 45)!)
+        createNewEvent(.Learning, startDate: _getTodayDateWithTime(5, minute: 45)!, endDate: _getTodayDateWithTime(20, minute: 30)!)
         
-        createNewEvent(.Troubleshooting, startDate: _getTomorrowDate(4, min: 15)!, endDate: _getTomorrowDate(4, min: 50)!)
-        createNewEvent(.Learning, startDate: _getTomorrowDate(4, min: 50)!, endDate: _getTomorrowDate(5, min: 30)!)
-        createNewEvent(.Productivity, startDate: _getTomorrowDate(5, min: 30)!, endDate: _getTomorrowDate(8, min: 0)!)
-        createNewEvent(.Rework, startDate: _getTomorrowDate(8, min: 0)!, endDate: _getTomorrowDate(8, min: 30)!)
+        createNewEvent(.Troubleshooting, startDate: _getTomorrowDateWithTime(4, minute: 15)!, endDate: _getTomorrowDateWithTime(4, minute: 50)!)
+        createNewEvent(.Learning, startDate: _getTomorrowDateWithTime(4, minute: 50)!, endDate: _getTomorrowDateWithTime(5, minute: 30)!)
+        createNewEvent(.Productivity, startDate: _getTomorrowDateWithTime(5, minute: 30)!, endDate: _getTomorrowDateWithTime(8, minute: 0)!)
+        createNewEvent(.Rework, startDate: _getTomorrowDateWithTime(8, minute: 0)!, endDate: _getTomorrowDateWithTime(8, minute: 30)!)
         
         NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.EventAdded.rawValue, object: self)
     }
     
-    class func _getTodayDate(hour: Int, min: Int) -> NSDate?
+    class func _getTodayDateWithTime(hour: Int, minute: Int, second: Int = 0) -> NSDate?
     {
+        let today = NSDate()
+        let todayComponents = today.dayComponents()
+        
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let dateComponents = NSDateComponents()
         dateComponents.second = 0
-        dateComponents.minute = min
+        dateComponents.minute = minute
         dateComponents.hour = hour
-        dateComponents.day = 15
-        dateComponents.month = 8
-        dateComponents.year = 2015
+        dateComponents.day = todayComponents.day
+        dateComponents.month = todayComponents.month
+        dateComponents.year = todayComponents.year
         return calendar?.dateFromComponents(dateComponents)
     }
     
-    class func _getTomorrowDate(hour: Int, min: Int) -> NSDate?
+    class func _getTomorrowDateWithTime(hour: Int, minute: Int, second: Int = 0) -> NSDate?
     {
+        let today = NSDate()
+        let tomorrow = today.dateOffsetBy(days: 1)
+        let tomorrowComponents = tomorrow!.dayComponents()
+        
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let dateComponents = NSDateComponents()
         dateComponents.second = 0
-        dateComponents.minute = min
+        dateComponents.minute = minute
         dateComponents.hour = hour
-        dateComponents.day = 16
-        dateComponents.month = 8
-        dateComponents.year = 2015
+        dateComponents.day = tomorrowComponents.day
+        dateComponents.month = tomorrowComponents.month
+        dateComponents.year = tomorrowComponents.year
         return calendar?.dateFromComponents(dateComponents)
     }
     

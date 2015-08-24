@@ -9,18 +9,33 @@
 import Foundation
 
 extension NSDate
-{    
-    func dayComponents() -> (day: Int, month: Int, year: Int)
+{
+    func dateOffsetBy(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> NSDate?
+    {
+        let deltaComps = NSDateComponents()
+        deltaComps.year = years
+        deltaComps.month = months
+        deltaComps.day = days
+        deltaComps.hour = hours
+        deltaComps.minute = minutes
+        deltaComps.second = seconds
+        let offsetDate = NSCalendar.currentCalendar().dateByAddingComponents(deltaComps, toDate: self, options: NSCalendarOptions(0))
+        return offsetDate
+    }
+    
+    func dayComponents() -> (day: Int, month: Int, year: Int, hour: Int, minute: Int, second: Int)
     {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let dateComponents = calendar?.components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear, fromDate: self)
+        let dateComponents = calendar?.components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond, fromDate: self)
         
         let day = Int(dateComponents?.day ?? 0)
         let month = Int(dateComponents?.month ?? 0)
         let year = Int(dateComponents?.year ?? 0)
+        let hour = Int(dateComponents?.hour ?? 0)
+        let minute = Int(dateComponents?.minute ?? 0)
+        let second = Int(dateComponents?.second ?? 0)
         
-        
-        return (day, month, year)
+        return (day, month, year, hour, minute, second)
     }
     
     func isInDay(otherDate: NSDate) -> Bool

@@ -35,20 +35,12 @@ extension NSDate
         let second = CGFloat(dateComponents?.second ?? 0)
         let minute = CGFloat(dateComponents?.minute ?? 0)
         let hour = CGFloat(dateComponents?.hour ?? 0)
-        
-//        let hourPercent = ((hour % hoursPerDay) / hoursPerDay)
-//        let minutePercent = ((minute % minutesPerDay) / minutesPerDay)
-//        let secondPercent = ((second % secondsPerDay) / secondsPerDay)
 
-                let hourPercent = (hour / hoursPerDay)
-                let minutePercent = (minute / minutesPerDay)
-                let secondPercent = (second / secondsPerDay)
+        let hourPercent = (hour / hoursPerDay)
+        let minutePercent = (minute / minutesPerDay)
+        let secondPercent = (second / secondsPerDay)
 
-        
-//        println("   \(hour.noDecimalsFormat()):\(minute.noDecimalsFormat()):\(second.noDecimalsFormat())")
-        
         let percent = hourPercent + minutePercent + secondPercent
-//        println("   \(hourPercent.twoDecimalsFormat())%h + \(minutePercent.twoDecimalsFormat())%m \(secondPercent.twoDecimalsFormat())%s = \(percent.twoDecimalsFormat())%")
         return percent
     }
 }
