@@ -66,7 +66,7 @@ extension IdeaFlowEvent
         dateComponents.day = offset
         
         let calendar = NSCalendar.currentCalendar()
-        return calendar.dateByAddingComponents(dateComponents, toDate: getSelectedDate(), options: NSCalendarOptions(0))
+        return calendar.dateByAddingComponents(dateComponents, toDate: getSelectedDate(), options: NSCalendarOptions(rawValue: 0))
     }
     
     class func setSelectedDayWithOffset(offset: Int)

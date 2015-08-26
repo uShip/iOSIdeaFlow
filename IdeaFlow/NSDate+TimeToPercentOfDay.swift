@@ -30,7 +30,7 @@ extension NSDate
     func timeToPercentOfDay() -> CGFloat
     {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let dateComponents = calendar?.components(.CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond, fromDate: self)
+        let dateComponents = calendar?.components([.Hour, .Minute, .Second], fromDate: self)
         
         let second = CGFloat(dateComponents?.second ?? 0)
         let minute = CGFloat(dateComponents?.minute ?? 0)

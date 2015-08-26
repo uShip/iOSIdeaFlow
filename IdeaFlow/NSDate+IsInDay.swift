@@ -19,14 +19,14 @@ extension NSDate
         deltaComps.hour = hours
         deltaComps.minute = minutes
         deltaComps.second = seconds
-        let offsetDate = NSCalendar.currentCalendar().dateByAddingComponents(deltaComps, toDate: self, options: NSCalendarOptions(0))
+        let offsetDate = NSCalendar.currentCalendar().dateByAddingComponents(deltaComps, toDate: self, options: NSCalendarOptions(rawValue: 0))
         return offsetDate
     }
     
     func dayComponents() -> (day: Int, month: Int, year: Int, hour: Int, minute: Int, second: Int)
     {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let dateComponents = calendar?.components(.CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear | .CalendarUnitHour | .CalendarUnitMinute | .CalendarUnitSecond, fromDate: self)
+        let dateComponents = calendar?.components([.Day, .Month, .Year, .Hour, .Minute, .Second], fromDate: self)
         
         let day = Int(dateComponents?.day ?? 0)
         let month = Int(dateComponents?.month ?? 0)

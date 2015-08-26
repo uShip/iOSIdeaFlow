@@ -16,9 +16,9 @@ extension IdeaFlowNote
     {
         let predicate = NSPredicate(format: "event.identifier = '%@'", event.identifier)
         IdeaFlowNote.MR_deleteAllMatchingPredicate(predicate)
-        println("\(IdeaFlowNote.MR_countOfEntities())")
+        print("\(IdeaFlowNote.MR_countOfEntities())")
         
-        var note = IdeaFlowNote.MR_createEntity()
+        let note = IdeaFlowNote.MR_createEntity()
         note.timeStamp = NSDate()
         note.noteContent = noteContent
         note.event = event

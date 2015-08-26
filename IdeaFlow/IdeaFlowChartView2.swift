@@ -19,8 +19,16 @@ extension CGFloat
 class IdeaFlowChartView2: UIView
 {
     let lineWidth = CGFloat(5)
+    let radiusInset = CGFloat(5)
     var centerPoint: CGPoint?
     var radius: CGFloat?
+    
+    var permanentOffset = CGFloat(0)
+    var permanentOffsetPoint = CGPointZero
+    var transientOffset = CGFloat(0)
+    var transientOffsetPoint = CGPointZero
+    var experimentalOffset: CGFloat { get { return permanentOffset + transientOffset} }
+    var experimentalOffsetPoint: CGPoint { get { return CGPointMake(permanentOffsetPoint.x + transientOffsetPoint.x, permanentOffsetPoint.y + transientOffsetPoint.y)} }
     
     override func awakeFromNib()
     {
@@ -28,6 +36,9 @@ class IdeaFlowChartView2: UIView
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.SelectedDateChanged.rawValue, object: nil)
+        
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("panGestureTriggered:"))
+        addGestureRecognizer(gestureRecognizer)
     }
     
     deinit
@@ -35,36 +46,94 @@ class IdeaFlowChartView2: UIView
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    func panGestureTriggered(gestureRecognizer: UIPanGestureRecognizer)
+    {
+        let translationFromStartOfGesture = gestureRecognizer.translationInView(self)
+        let totalTanslation = sqrt(translationFromStartOfGesture.x * translationFromStartOfGesture.x + translationFromStartOfGesture.y * translationFromStartOfGesture.y)
+        
+        var sign = 1
+        if translationFromStartOfGesture.x < 0 || translationFromStartOfGesture.y < 0
+        {
+            if translationFromStartOfGesture.x < 0 && translationFromStartOfGesture.y < 0
+            {
+                sign = -1
+            }
+            else
+            {
+                if fabs(translationFromStartOfGesture.x) > fabs(translationFromStartOfGesture.y)
+                {
+                    if translationFromStartOfGesture.x < 0
+                    {
+                        sign = -1
+                    }
+                }
+                else
+                {
+                    if translationFromStartOfGesture.y < 0
+                    {
+                        sign = -1
+                    }
+                }
+            }
+        }
+        
+        transientOffset = CGFloat(totalTanslation) * CGFloat(sign)
+        transientOffsetPoint = translationFromStartOfGesture
+        
+        setNeedsDisplay()
+        
+        if (gestureRecognizer.state == .Ended)
+        {
+            permanentOffsetPoint = experimentalOffsetPoint
+            permanentOffset = experimentalOffset
+            transientOffsetPoint = CGPointZero
+            transientOffset = CGFloat(0)
+        }
+    }
+    
     func _refresh()
     {
         
-        println("\nq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)p\n")
+        print("\nq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)p\n")
         setNeedsDisplay()
+    }
+    
+    private func _debugPrint()
+    {
+        print("offsetPoint: \(experimentalOffsetPoint)  --|--  offset: \(experimentalOffset)")
+        print("screen size: \(UIScreen.mainScreen().bounds)  --|--  height-width: \(UIScreen.mainScreen().bounds.height - UIScreen.mainScreen().bounds.width)")
+        print("bounds: \(bounds)  --|--  height-width: \(bounds.height - bounds.width)")
+        print("radiusInset: \(radiusInset)")
+        let offsetCenterPoint = CGPointMake(centerPoint!.x + experimentalOffsetPoint.x, centerPoint!.y + experimentalOffsetPoint.y)
+        print("centerPoint: \(centerPoint!)  -->  offsetCenterPoint: \(offsetCenterPoint)")
     }
     
     override func drawRect(rect: CGRect)
     {
         centerPoint = CGPointMake(bounds.width / 2.0, bounds.height / 2.0)
-        radius = fmin(centerPoint!.x, centerPoint!.y) - CGFloat(5)
+        radius = fmin(centerPoint!.x, centerPoint!.y) - radiusInset
+     
+        _debugPrint()
         
         let context = UIGraphicsGetCurrentContext()
         
         let hours = 24
-        drawEventRings(context)
-        drawQuarterHourMarkers(context,hours:hours)
-        drawHoursText(context, rect: rect, x: centerPoint!.x, y: centerPoint!.y, radius: radius!, sides: hours, color: UIColor.whiteColor())
+        drawCrossTranslated(context!)
+        drawCross(context!)
+        drawEventRings(context!)
+        drawQuarterHourMarkers(context!,hours:hours)
+        drawHoursText(context!, rect: rect, x: centerPoint!.x, y: centerPoint!.y, radius: radius!, sides: hours, color: UIColor.whiteColor())
     }
     
     private func drawCross(context: CGContextRef)
     {
-        // save the original position and origin
-        CGContextSaveGState(context)
-        // make translation
-        CGContextTranslateCTM(context, (-centerPoint!.x / 2), (centerPoint!.x * 2) + (centerPoint!.y - centerPoint!.x))
-        // make rotation
-        let degrees = CGFloat(-90)
-        CGContextRotateCTM(context, degrees.degreesToRadians())
-        
+//        // save the original position and origin
+//        CGContextSaveGState(context)
+//        // make translation
+//        CGContextTranslateCTM(context, (-centerPoint!.x / 2), (centerPoint!.x * 2) + (centerPoint!.y - centerPoint!.x))
+//        // make rotation
+//        let degrees = CGFloat(-90)
+//        CGContextRotateCTM(context, degrees.degreesToRadians())
         
         CGContextMoveToPoint(context, centerPoint!.x, 0)
         CGContextAddLineToPoint(context, centerPoint!.x, bounds.height)
@@ -73,8 +142,35 @@ class IdeaFlowChartView2: UIView
         
         CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
         CGContextSetLineWidth(context, 0.5)
-        CGContextDrawPath(context, kCGPathStroke)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
         
+//        // restore state before next translation
+//        CGContextRestoreGState(context)
+    }
+    
+    private func _rotateContextNegative90Degrees(context: CGContextRef)
+    {
+        CGContextTranslateCTM(context, centerPoint!.x, centerPoint!.y)
+        CGContextRotateCTM(context, CGFloat(-90).degreesToRadians())
+        CGContextTranslateCTM(context, -centerPoint!.x, -centerPoint!.y)
+    }
+    
+    private func drawCrossTranslated(context: CGContextRef)
+    {
+        // save the original position and origin
+        CGContextSaveGState(context)
+        // make translation
+        _rotateContextNegative90Degrees(context)
+        
+        CGContextMoveToPoint(context, centerPoint!.x, 0)
+        CGContextAddLineToPoint(context, centerPoint!.x, bounds.height)
+        CGContextMoveToPoint(context, 0, centerPoint!.y)
+        CGContextAddLineToPoint(context, bounds.width, centerPoint!.y)
+        
+        CGContextSetStrokeColorWithColor(context, UIColor.orangeColor().CGColor)
+        CGContextSetLineWidth(context, 0.5)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+
         // restore state before next translation
         CGContextRestoreGState(context)
     }
@@ -84,12 +180,12 @@ class IdeaFlowChartView2: UIView
         if let events = IdeaFlowEvent.getEventsForSelectedDate()
         {
             var index : CGFloat = 0
-            var currentRadius : CGFloat = radius!
+            let currentRadius : CGFloat = radius!
             
             // save the original position and origin
             CGContextSaveGState(context)
             // make translation
-            CGContextTranslateCTM(context, (-centerPoint!.x / 2), (centerPoint!.x * 2) + (centerPoint!.y - centerPoint!.x))
+            CGContextTranslateCTM(context, (-centerPoint!.x / 2)+experimentalOffsetPoint.x, (centerPoint!.x * 2) + (centerPoint!.y - centerPoint!.x)+experimentalOffsetPoint.y)
             // make rotation
             let degrees = CGFloat(-90)
             CGContextRotateCTM(context, degrees.degreesToRadians())
@@ -110,7 +206,7 @@ class IdeaFlowChartView2: UIView
                     
                     CGContextSetStrokeColorWithColor(context, event.eventTypeColor().CGColor)
                     CGContextSetLineWidth(context, lineWidth)
-                    CGContextDrawPath(context, kCGPathStroke)
+                    CGContextDrawPath(context, CGPathDrawingMode.Stroke)
                     
                     index = index + 1
                 }
@@ -195,9 +291,9 @@ class IdeaFlowChartView2: UIView
         let inset = CGFloat(35)
         // An adjustment of 270 degrees to position numbers correctly
         let points = circleCircumferencePoints(sides,x: x,y: y,radius: radius-inset, adjustment:270)
-        let path = CGPathCreateMutable()
+        _ = CGPathCreateMutable()
         
-        for p in enumerate(points)
+        for p in points.enumerate()
         {
             if p.index > 0
             {
@@ -215,7 +311,7 @@ class IdeaFlowChartView2: UIView
                 // set the line width to stroke the text with
                 CGContextSetLineWidth(context, 1.5)
                 // set the drawing mode to stroke
-                CGContextSetTextDrawingMode(context, kCGTextStroke)
+                CGContextSetTextDrawingMode(context, CGTextDrawingMode.Stroke)
                 // Set text position and draw the line into the graphics context, text length and height is adjusted for
                 let xn = p.element.x - bounds.width/2
                 let yn = p.element.y - bounds.midY

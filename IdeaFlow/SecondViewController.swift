@@ -44,10 +44,14 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func performFetch()
     {
         var error:NSError?
-        fetchResultsController?.performFetch(&error)
+        do {
+            try fetchResultsController?.performFetch()
+        } catch let error1 as NSError {
+            error = error1
+        }
         if let error = error
         {
-            println("\(error)")
+            print("\(error)")
         }
     }
     
@@ -72,10 +76,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         {
             if sections.count > section
             {
-                if let sectionInfo = sections[section] as? NSFetchedResultsSectionInfo
-                {
-                    return sectionInfo.numberOfObjects
-                }
+                let sectionInfo = sections[section]
+                return sectionInfo.numberOfObjects
             }
         }
         return 0
