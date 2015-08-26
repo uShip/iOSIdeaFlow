@@ -36,9 +36,6 @@ class IdeaFlowChartView2: UIView
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.SelectedDateChanged.rawValue, object: nil)
-        
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("panGestureTriggered:"))
-        addGestureRecognizer(gestureRecognizer)
     }
     
     deinit
@@ -46,65 +43,9 @@ class IdeaFlowChartView2: UIView
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    func panGestureTriggered(gestureRecognizer: UIPanGestureRecognizer)
-    {
-        let translationFromStartOfGesture = gestureRecognizer.translationInView(self)
-        let totalTanslation = sqrt(translationFromStartOfGesture.x * translationFromStartOfGesture.x + translationFromStartOfGesture.y * translationFromStartOfGesture.y)
-        
-        var sign = 1
-        if translationFromStartOfGesture.x < 0 || translationFromStartOfGesture.y < 0
-        {
-            if translationFromStartOfGesture.x < 0 && translationFromStartOfGesture.y < 0
-            {
-                sign = -1
-            }
-            else
-            {
-                if fabs(translationFromStartOfGesture.x) > fabs(translationFromStartOfGesture.y)
-                {
-                    if translationFromStartOfGesture.x < 0
-                    {
-                        sign = -1
-                    }
-                }
-                else
-                {
-                    if translationFromStartOfGesture.y < 0
-                    {
-                        sign = -1
-                    }
-                }
-            }
-        }
-        
-        transientOffset = CGFloat(totalTanslation) * CGFloat(sign)
-        transientOffsetPoint = translationFromStartOfGesture
-        
-        setNeedsDisplay()
-        
-        if (gestureRecognizer.state == .Ended)
-        {
-            permanentOffsetPoint = experimentalOffsetPoint
-            permanentOffset = experimentalOffset
-            transientOffsetPoint = CGPointZero
-            transientOffset = CGFloat(0)
-        }
-    }
-    
     func _refresh()
     {
-//        print("\nq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)p\n")
         setNeedsDisplay()
-    }
-    
-    private func _debugPrint()
-    {
-        print("offsetPoint: \(experimentalOffsetPoint)  --|--  offset: \(experimentalOffset)")
-        print("screen size: \(UIScreen.mainScreen().bounds)  --|--  height-width: \(UIScreen.mainScreen().bounds.height - UIScreen.mainScreen().bounds.width)")
-        print("bounds: \(bounds)  --|--  height-width: \(bounds.height - bounds.width)")
-        print("radiusInset: \(radiusInset)")
-        let offsetCenterPoint = CGPointMake(centerPoint!.x + experimentalOffsetPoint.x, centerPoint!.y + experimentalOffsetPoint.y)
-        print("centerPoint: \(centerPoint!)  -->  offsetCenterPoint: \(offsetCenterPoint)")
     }
     
     private func _rotateContextNegative90Degrees(context: CGContextRef)
@@ -118,14 +59,10 @@ class IdeaFlowChartView2: UIView
     {
         centerPoint = CGPointMake(bounds.width / 2.0, bounds.height / 2.0)
         radius = fmin(centerPoint!.x, centerPoint!.y) - radiusInset
-     
-//        _debugPrint()
         
         let context = UIGraphicsGetCurrentContext()
         
         let hours = 24
-//        drawCrossTranslated(context!)
-//        drawCross(context!)
         drawEventRings(context!)
         drawQuarterHourMarkers(context!,hours:hours)
         drawHoursText(context!, rect: rect, x: centerPoint!.x, y: centerPoint!.y, radius: radius!, sides: hours, color: UIColor.whiteColor())
