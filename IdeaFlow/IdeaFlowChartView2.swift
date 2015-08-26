@@ -93,8 +93,7 @@ class IdeaFlowChartView2: UIView
     
     func _refresh()
     {
-        
-        print("\nq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)p\n")
+//        print("\nq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)pq(^o^q)(p^o^)p\n")
         setNeedsDisplay()
     }
     
@@ -108,18 +107,25 @@ class IdeaFlowChartView2: UIView
         print("centerPoint: \(centerPoint!)  -->  offsetCenterPoint: \(offsetCenterPoint)")
     }
     
+    private func _rotateContextNegative90Degrees(context: CGContextRef)
+    {
+        CGContextTranslateCTM(context, centerPoint!.x, centerPoint!.y)
+        CGContextRotateCTM(context, CGFloat(-90).degreesToRadians())
+        CGContextTranslateCTM(context, -centerPoint!.x, -centerPoint!.y)
+    }
+    
     override func drawRect(rect: CGRect)
     {
         centerPoint = CGPointMake(bounds.width / 2.0, bounds.height / 2.0)
         radius = fmin(centerPoint!.x, centerPoint!.y) - radiusInset
      
-        _debugPrint()
+//        _debugPrint()
         
         let context = UIGraphicsGetCurrentContext()
         
         let hours = 24
-        drawCrossTranslated(context!)
-        drawCross(context!)
+//        drawCrossTranslated(context!)
+//        drawCross(context!)
         drawEventRings(context!)
         drawQuarterHourMarkers(context!,hours:hours)
         drawHoursText(context!, rect: rect, x: centerPoint!.x, y: centerPoint!.y, radius: radius!, sides: hours, color: UIColor.whiteColor())
@@ -127,13 +133,8 @@ class IdeaFlowChartView2: UIView
     
     private func drawCross(context: CGContextRef)
     {
-//        // save the original position and origin
-//        CGContextSaveGState(context)
-//        // make translation
-//        CGContextTranslateCTM(context, (-centerPoint!.x / 2), (centerPoint!.x * 2) + (centerPoint!.y - centerPoint!.x))
-//        // make rotation
-//        let degrees = CGFloat(-90)
-//        CGContextRotateCTM(context, degrees.degreesToRadians())
+        CGContextSaveGState(context)
+        _rotateContextNegative90Degrees(context)
         
         CGContextMoveToPoint(context, centerPoint!.x, 0)
         CGContextAddLineToPoint(context, centerPoint!.x, bounds.height)
@@ -144,22 +145,12 @@ class IdeaFlowChartView2: UIView
         CGContextSetLineWidth(context, 0.5)
         CGContextDrawPath(context, CGPathDrawingMode.Stroke)
         
-//        // restore state before next translation
-//        CGContextRestoreGState(context)
-    }
-    
-    private func _rotateContextNegative90Degrees(context: CGContextRef)
-    {
-        CGContextTranslateCTM(context, centerPoint!.x, centerPoint!.y)
-        CGContextRotateCTM(context, CGFloat(-90).degreesToRadians())
-        CGContextTranslateCTM(context, -centerPoint!.x, -centerPoint!.y)
+        CGContextRestoreGState(context)
     }
     
     private func drawCrossTranslated(context: CGContextRef)
     {
-        // save the original position and origin
         CGContextSaveGState(context)
-        // make translation
         _rotateContextNegative90Degrees(context)
         
         CGContextMoveToPoint(context, centerPoint!.x, 0)
@@ -171,7 +162,6 @@ class IdeaFlowChartView2: UIView
         CGContextSetLineWidth(context, 0.5)
         CGContextDrawPath(context, CGPathDrawingMode.Stroke)
 
-        // restore state before next translation
         CGContextRestoreGState(context)
     }
     
@@ -182,13 +172,8 @@ class IdeaFlowChartView2: UIView
             var index : CGFloat = 0
             let currentRadius : CGFloat = radius!
             
-            // save the original position and origin
             CGContextSaveGState(context)
-            // make translation
-            CGContextTranslateCTM(context, (-centerPoint!.x / 2)+experimentalOffsetPoint.x, (centerPoint!.x * 2) + (centerPoint!.y - centerPoint!.x)+experimentalOffsetPoint.y)
-            // make rotation
-            let degrees = CGFloat(-90)
-            CGContextRotateCTM(context, degrees.degreesToRadians())
+            _rotateContextNegative90Degrees(context)
             
             for event in events
             {
@@ -212,7 +197,6 @@ class IdeaFlowChartView2: UIView
                 }
             }
             
-            // restore state before next translation
             CGContextRestoreGState(context)
         }
     }
