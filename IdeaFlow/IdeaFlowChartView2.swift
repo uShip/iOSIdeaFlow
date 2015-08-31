@@ -18,9 +18,15 @@ extension CGFloat
 
 class IdeaFlowChartView2: UIView
 {
-    let lineWidth = CGFloat(5)
+    var lineWidth :CGFloat //= CGFloat(20)
+    {
+        get{
+            return fmin(centerPoint.x,centerPoint.y) - radiusInset
+        }
+        
+    }
     let radiusInset = CGFloat(5)
-    var centerPoint: CGPoint?
+    var centerPoint = CGPoint(x: 0, y: 0)
     var radius: CGFloat?
     
     var permanentOffset = CGFloat(0)
@@ -50,22 +56,22 @@ class IdeaFlowChartView2: UIView
     
     private func _rotateContextNegative90Degrees(context: CGContextRef)
     {
-        CGContextTranslateCTM(context, centerPoint!.x, centerPoint!.y)
+        CGContextTranslateCTM(context, centerPoint.x, centerPoint.y)
         CGContextRotateCTM(context, CGFloat(-90).degreesToRadians())
-        CGContextTranslateCTM(context, -centerPoint!.x, -centerPoint!.y)
+        CGContextTranslateCTM(context, -centerPoint.x, -centerPoint.y)
     }
     
     override func drawRect(rect: CGRect)
     {
         centerPoint = CGPointMake(bounds.width / 2.0, bounds.height / 2.0)
-        radius = fmin(centerPoint!.x, centerPoint!.y) - radiusInset
+        radius = fmin(centerPoint.x, centerPoint.y) - radiusInset
         
         let context = UIGraphicsGetCurrentContext()
         
         let hours = 24
         drawEventRings(context!)
         drawQuarterHourMarkers(context!,hours:hours)
-        drawHoursText(context!, rect: rect, x: centerPoint!.x, y: centerPoint!.y, radius: radius!, sides: hours, color: UIColor.whiteColor())
+        drawHoursText(context!, rect: rect, x: centerPoint.x, y: centerPoint.y, radius: radius!, sides: hours, color: UIColor.whiteColor())
     }
     
     private func drawCross(context: CGContextRef)
@@ -73,10 +79,10 @@ class IdeaFlowChartView2: UIView
         CGContextSaveGState(context)
         _rotateContextNegative90Degrees(context)
         
-        CGContextMoveToPoint(context, centerPoint!.x, 0)
-        CGContextAddLineToPoint(context, centerPoint!.x, bounds.height)
-        CGContextMoveToPoint(context, 0, centerPoint!.y)
-        CGContextAddLineToPoint(context, bounds.width, centerPoint!.y)
+        CGContextMoveToPoint(context, centerPoint.x, 0)
+        CGContextAddLineToPoint(context, centerPoint.x, bounds.height)
+        CGContextMoveToPoint(context, 0, centerPoint.y)
+        CGContextAddLineToPoint(context, bounds.width, centerPoint.y)
         
         CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
         CGContextSetLineWidth(context, 0.5)
@@ -90,10 +96,10 @@ class IdeaFlowChartView2: UIView
         CGContextSaveGState(context)
         _rotateContextNegative90Degrees(context)
         
-        CGContextMoveToPoint(context, centerPoint!.x, 0)
-        CGContextAddLineToPoint(context, centerPoint!.x, bounds.height)
-        CGContextMoveToPoint(context, 0, centerPoint!.y)
-        CGContextAddLineToPoint(context, bounds.width, centerPoint!.y)
+        CGContextMoveToPoint(context, centerPoint.x, 0)
+        CGContextAddLineToPoint(context, centerPoint.x, bounds.height)
+        CGContextMoveToPoint(context, 0, centerPoint.y)
+        CGContextAddLineToPoint(context, bounds.width, centerPoint.y)
         
         CGContextSetStrokeColorWithColor(context, UIColor.orangeColor().CGColor)
         CGContextSetLineWidth(context, 0.5)
@@ -107,7 +113,7 @@ class IdeaFlowChartView2: UIView
         if let events = IdeaFlowEvent.getEventsForSelectedDate()
         {
             var index : CGFloat = 0
-            let currentRadius : CGFloat = radius!
+            let currentRadius : CGFloat = radius! - lineWidth/2.0
             
             CGContextSaveGState(context)
             _rotateContextNegative90Degrees(context)
@@ -124,7 +130,7 @@ class IdeaFlowChartView2: UIView
                     let startAngle = (startPercent * CGFloat(2*M_PI))
                     let endAngle = (endPercent * CGFloat(2*M_PI))
                     
-                    CGContextAddArc(context, centerPoint!.x, centerPoint!.y, currentRadius, startAngle, endAngle, 0)
+                    CGContextAddArc(context, centerPoint.x, centerPoint.y, currentRadius, startAngle, endAngle, 0)
                     
                     CGContextSetStrokeColorWithColor(context, event.eventTypeColor().CGColor)
                     CGContextSetLineWidth(context, lineWidth)
@@ -147,7 +153,7 @@ class IdeaFlowChartView2: UIView
             // save the original position and origin
             CGContextSaveGState(context)
             // make translation
-            CGContextTranslateCTM(context, centerPoint!.x, centerPoint!.y)
+            CGContextTranslateCTM(context, centerPoint.x, centerPoint.y)
             // make rotation
             let degrees = CGFloat(i)*degreesPerMarker
             CGContextRotateCTM(context, degrees.degreesToRadians())

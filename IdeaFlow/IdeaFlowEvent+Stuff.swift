@@ -120,7 +120,7 @@ extension IdeaFlowEvent
         switch eventType.integerValue
         {
         case 0:
-            return UIColor.whiteColor()
+            return UIColor.lightGrayColor()
         case 1:
             return UIColor.redColor()
         case 2:
@@ -173,7 +173,7 @@ extension IdeaFlowEvent
         NSNotificationCenter.defaultCenter().postNotificationName(Notifications.EventAdded.rawValue, object: self)
     }
     
-    class func createDummyEvents()
+    class func createDemoEvents()
     {
         
         createNewEvent(.Troubleshooting, startDate: _getTodayDateWithTime(1, minute: 15)!, endDate: _getTodayDateWithTime(1, minute: 50)!)

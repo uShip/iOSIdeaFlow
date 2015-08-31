@@ -45,8 +45,8 @@ class TabBarController : UITabBarController
             self?.addEvent(.Rework)
         }))
         
-        alert.addAction(UIAlertAction(title: "Add Dummy Data", style: .Default, handler: { [weak self] (action) -> Void in
-            self?.createDummyEvents()
+        alert.addAction(UIAlertAction(title: "Add Demo Data", style: .Default, handler: { [weak self] (action) -> Void in
+            self?.createDemoEvents()
         }))
         
         alert.addAction(UIAlertAction(title: "Delete All", style: .Destructive, handler: { [weak self] (action) -> Void in
@@ -63,11 +63,11 @@ class TabBarController : UITabBarController
         IdeaFlowEvent.addNewEvent(eventType)
     }
     
-    func createDummyEvents()
+    func createDemoEvents()
     {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         IdeaFlowEvent.deleteAllEvents()
-        IdeaFlowEvent.createDummyEvents()
+        IdeaFlowEvent.createDemoEvents()
     }
     
     func deleteAllEvents()
