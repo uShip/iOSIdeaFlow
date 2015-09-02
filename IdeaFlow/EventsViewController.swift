@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  EventsViewController.swift
 //  IdeaFlow
 //
 //  Created by Matt Hayes on 8/14/15.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet var tableView: UITableView!
     

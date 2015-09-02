@@ -9,7 +9,7 @@
         <!--Charts-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="IdeaFlow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="ChartViewController" customModule="IdeaFlow" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -84,7 +84,7 @@
         <!--Events-->
         <scene sceneID="aXV-ym-k7v">
             <objects>
-                <viewController id="vMN-4o-4jh" customClass="SecondViewController" customModule="IdeaFlow" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vMN-4o-4jh" customClass="EventsViewController" customModule="IdeaFlow" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LqE-4y-hMX"/>
                         <viewControllerLayoutGuide type="bottom" id="PHT-D5-vLT"/>
@@ -267,7 +267,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="clock" width="44" height="44"/>
-        <image name="note_2" width="44" height="44"/>
+        <image name="clock" width="30" height="30"/>
+        <image name="note_2" width="24" height="28"/>
     </resources>
 </document>

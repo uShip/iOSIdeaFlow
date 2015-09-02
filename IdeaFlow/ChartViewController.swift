@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  ChartViewController.swift
 //  IdeaFlow
 //
 //  Created by Matt Hayes on 8/14/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController
+class ChartViewController: UIViewController
 {
     @IBOutlet weak var previousDate: UIButton!
     @IBOutlet weak var currentDate: UILabel!
@@ -18,6 +18,14 @@ class FirstViewController: UIViewController
     {
         super.viewDidLoad()
         refreshDateLabel()
+        
+//        let longPresser = UILongPressGestureRecognizer(target: self, action: Selector("onLongPress:"))
+//        self.view.addGestureRecognizer(longPresser)
+    }
+    
+    func onLongPress(gestureRecognizer: UILongPressGestureRecognizer)
+    {
+        print("\(__FUNCTION__)")
     }
     
     
