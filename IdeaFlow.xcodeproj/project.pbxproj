@@ -65,6 +65,7 @@
 		84E2463B1B7FBD290042000D /* IdeaFlowNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowNote.swift; sourceTree = "<group>"; };
 		84E2463C1B7FBD290042000D /* IdeaFlowEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowEvent.swift; sourceTree = "<group>"; };
 		84E2463F1B7FC3050042000D /* NSDate+IsInDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+IsInDay.swift"; sourceTree = "<group>"; };
+		AA50FE411B9522420065CE01 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DDC5249FD4EEB0EDF331FD76 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +99,7 @@
 		84E245E91B7E74330042000D = {
 			isa = PBXGroup;
 			children = (
+				AA50FE411B9522420065CE01 /* README.md */,
 				84E246191B7E77560042000D /* IdeaFlowModel.xcdatamodeld */,
 				84E245F41B7E74330042000D /* IdeaFlow */,
 				84E2460C1B7E74340042000D /* IdeaFlowTests */,

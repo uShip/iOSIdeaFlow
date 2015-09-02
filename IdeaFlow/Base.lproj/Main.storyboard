@@ -68,7 +68,7 @@
                             <constraint firstAttribute="trailing" secondItem="uTC-FJ-TdB" secondAttribute="trailing" id="wDz-LO-iGw"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Charts" selectedImage="clock" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Charts" image="clock" selectedImage="clock" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -79,9 +79,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="770" y="-322"/>
         </scene>
-        <!--Second View Controller-->
+        <!--Events-->
         <scene sceneID="aXV-ym-k7v">
             <objects>
                 <viewController id="vMN-4o-4jh" customClass="SecondViewController" customModule="IdeaFlow" customModuleProvider="target" sceneMemberID="viewController">
@@ -141,10 +141,10 @@
                         <constraints>
                             <constraint firstItem="cNl-af-zF4" firstAttribute="top" secondItem="LqE-4y-hMX" secondAttribute="bottom" id="28A-ek-tqg"/>
                             <constraint firstItem="PHT-D5-vLT" firstAttribute="top" secondItem="cNl-af-zF4" secondAttribute="bottom" id="QeJ-8S-rwq"/>
-                            <constraint firstItem="cNl-af-zF4" firstAttribute="top" secondItem="LqE-4y-hMX" secondAttribute="bottom" constant="-64" id="RrC-W6-IUc"/>
                             <constraint firstItem="cNl-af-zF4" firstAttribute="leading" secondItem="S6r-mG-1k5" secondAttribute="leading" id="WpE-0M-x15"/>
                             <constraint firstAttribute="trailing" secondItem="cNl-af-zF4" secondAttribute="trailing" id="YHT-Gm-vbo"/>
                             <constraint firstItem="cNl-af-zF4" firstAttribute="top" secondItem="S6r-mG-1k5" secondAttribute="topMargin" id="b0f-2C-LGu"/>
+                            <constraint firstItem="cNl-af-zF4" firstAttribute="top" secondItem="LqE-4y-hMX" secondAttribute="bottom" constant="-64" id="gTE-xt-oH7"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -153,7 +153,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="e6j-fd-d0M"/>
+                    <tabBarItem key="tabBarItem" title="Events" image="note_2" selectedImage="note_2" id="e6j-fd-d0M"/>
                     <connections>
                         <outlet property="tableView" destination="cNl-af-zF4" id="Xll-rT-Ie2"/>
                     </connections>
@@ -267,6 +267,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="clock" width="50" height="50"/>
+        <image name="clock" width="44" height="44"/>
+        <image name="note_2" width="44" height="44"/>
     </resources>
 </document>
