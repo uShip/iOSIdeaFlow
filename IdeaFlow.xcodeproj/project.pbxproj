@@ -26,6 +26,8 @@
 		84E2463D1B7FBD290042000D /* IdeaFlowNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2463B1B7FBD290042000D /* IdeaFlowNote.swift */; };
 		84E2463E1B7FBD290042000D /* IdeaFlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2463C1B7FBD290042000D /* IdeaFlowEvent.swift */; };
 		84E246401B7FC3050042000D /* NSDate+IsInDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2463F1B7FC3050042000D /* NSDate+IsInDay.swift */; };
+		AA50FE431B9743120065CE01 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FE421B9743120065CE01 /* MenuController.swift */; settings = {ASSET_TAGS = (); }; };
+		AA50FE451B97432C0065CE01 /* MenuControllerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FE441B97432C0065CE01 /* MenuControllerEvent.swift */; settings = {ASSET_TAGS = (); }; };
 		B7F2A7D67FD665E07D4455A0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DC3E6F8B4DBB9D9AFBE3F6D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		84E2463C1B7FBD290042000D /* IdeaFlowEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowEvent.swift; sourceTree = "<group>"; };
 		84E2463F1B7FC3050042000D /* NSDate+IsInDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+IsInDay.swift"; sourceTree = "<group>"; };
 		AA50FE411B9522420065CE01 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AA50FE421B9743120065CE01 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		AA50FE441B97432C0065CE01 /* MenuControllerEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuControllerEvent.swift; sourceTree = "<group>"; };
 		DDC5249FD4EEB0EDF331FD76 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +129,7 @@
 				84E245F51B7E74330042000D /* _Supporting Files */,
 				84E245F71B7E74330042000D /* AppDelegate.swift */,
 				84E245F91B7E74330042000D /* ChartViewController.swift */,
+				84E245FB1B7E74330042000D /* EventsViewController.swift */,
 				84E246351B7ED91B0042000D /* IdeaFlowChartView2.swift */,
 				84E2463C1B7FBD290042000D /* IdeaFlowEvent.swift */,
 				84E246201B7E82DC0042000D /* IdeaFlowEvent+Stuff.swift */,
@@ -132,9 +137,10 @@
 				84E246371B7FB6480042000D /* IdeaFlowEventDetailsViewController.swift */,
 				84E2463B1B7FBD290042000D /* IdeaFlowNote.swift */,
 				84E246391B7FBC020042000D /* IdeaFlowNote+Stuff.swift */,
+				AA50FE421B9743120065CE01 /* MenuController.swift */,
+				AA50FE441B97432C0065CE01 /* MenuControllerEvent.swift */,
 				84E2463F1B7FC3050042000D /* NSDate+IsInDay.swift */,
 				84E246311B7EBA590042000D /* NSDate+TimeToPercentOfDay.swift */,
-				84E245FB1B7E74330042000D /* EventsViewController.swift */,
 				84E2462A1B7E8C300042000D /* TabBarController.swift */,
 				84E246331B7EC8BC0042000D /* UIColor+inverse.swift */,
 			);
@@ -346,6 +352,8 @@
 				84E245F81B7E74330042000D /* AppDelegate.swift in Sources */,
 				84E2461B1B7E77560042000D /* IdeaFlowModel.xcdatamodeld in Sources */,
 				84E2463D1B7FBD290042000D /* IdeaFlowNote.swift in Sources */,
+				AA50FE431B9743120065CE01 /* MenuController.swift in Sources */,
+				AA50FE451B97432C0065CE01 /* MenuControllerEvent.swift in Sources */,
 				84E246381B7FB6480042000D /* IdeaFlowEventDetailsViewController.swift in Sources */,
 				84E246401B7FC3050042000D /* NSDate+IsInDay.swift in Sources */,
 				84E245FA1B7E74330042000D /* ChartViewController.swift in Sources */,

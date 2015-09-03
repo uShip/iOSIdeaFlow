@@ -13,48 +13,57 @@ import MagicalRecord
 
 class TabBarController : UITabBarController
 {
+    var menuController : MenuController?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        self.menuController = MenuController(presenter: self)
+        
         let button = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("addButtonTapped"))
         self.navigationItem.setRightBarButtonItem(button, animated: false)
+    }
+    
+    deinit
+    {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.removeObserver(self)
+    }
+    
+    private func _observeNotifications()
+    {
+        //Event Lifecycle
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: Selector("eventAdded"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
+        notificationCenter.addObserver(self, selector: Selector("eventsDeleted"), name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("eventAdded"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("eventsDeleted"), name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
+        //Menu Items
+        _observeMenuControllerEvent(.ShowMenu, selector: Selector("didShowMenu"))
+        _observeMenuControllerEvent(.DismissMenu, selector: Selector("didDismissMenu"))
+        _observeMenuControllerItemSelectedEvent(.Troubleshooting)
+        _observeMenuControllerItemSelectedEvent(.Rework)
+        _observeMenuControllerItemSelectedEvent(.Learning)
+        _observeMenuControllerItemSelectedEvent(.Productivity)
+        _observeMenuControllerItemSelectedEvent(.AddDemoEvents)
+        _observeMenuControllerItemSelectedEvent(.DeleteAll)
+        _observeMenuControllerItemSelectedEvent(.Cancel)
+    }
+    
+    private func _observeMenuControllerItemSelectedEvent(menuItem: MenuControllerItem)
+    {
+        _observeMenuControllerEvent(.MenuItemSelected(menuItem: menuItem), selector: Selector("didSelect\(menuItem.rawValue)"))
+    }
+    
+    private func _observeMenuControllerEvent(event: MenuControllerEvent, selector: Selector)
+    {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: selector, name: event.toString(), object: nil)
     }
     
     func addButtonTapped()
     {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        
-        alert.addAction(UIAlertAction(title: "Productivity", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
-            self?.addEvent(.Productivity)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Troubleshooting", style: UIAlertActionStyle.Default, handler: { [weak self] (action) -> Void in
-            self?.addEvent(.Troubleshooting)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Learning", style: .Default, handler: { [weak self] (action) -> Void in
-            self?.addEvent(.Learning)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Rework", style: .Default, handler: { [weak self] (action) -> Void in
-            self?.addEvent(.Rework)
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Add Demo Data", style: .Default, handler: { [weak self] (action) -> Void in
-            self?.createDemoEvents()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Delete All", style: .Destructive, handler: { [weak self] (action) -> Void in
-            self?.deleteAllEvents()
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-        
+        menuController?.presentMenu()
     }
     
     func addEvent(eventType: IdeaFlowEvent.EventType)

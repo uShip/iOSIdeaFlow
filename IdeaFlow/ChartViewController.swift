@@ -19,8 +19,8 @@ class ChartViewController: UIViewController
         super.viewDidLoad()
         refreshDateLabel()
         
-//        let longPresser = UILongPressGestureRecognizer(target: self, action: Selector("onLongPress:"))
-//        self.view.addGestureRecognizer(longPresser)
+        let longPresser = UILongPressGestureRecognizer(target: self, action: Selector("onLongPress:"))
+        self.view.addGestureRecognizer(longPresser)
     }
     
     func onLongPress(gestureRecognizer: UILongPressGestureRecognizer)
