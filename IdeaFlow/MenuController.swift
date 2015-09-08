@@ -60,9 +60,7 @@ class MenuController
     private func _menuItemSelected(menuItem: MenuControllerItem)
     {
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        
-        let notificationName = MenuControllerEvent.MenuItemSelected(menuItem: menuItem).toString()
-        
-        notificationCenter.postNotificationName(notificationName, object: self)
+        let notification = MenuControllerEvent.MenuItemSelected(menuItem: menuItem).notification(sender: self)
+        notificationCenter.postNotification(notification)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  IdeaFlowNote+Stuff.swift
+//  IdeaFlowNote+CreateNote.swift
 //  IdeaFlow
 //
 //  Created by Matt Hayes on 8/15/15.

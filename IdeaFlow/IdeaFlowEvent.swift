@@ -10,12 +10,11 @@ import Foundation
 import CoreData
 
 @objc(IdeaFlowEvent)
-class IdeaFlowEvent: NSManagedObject {
-
+class IdeaFlowEvent: NSManagedObject
+{
     @NSManaged var eventType: NSNumber
-    @NSManaged var startTimeStamp: NSDate
+    @NSManaged var startTimeStamp: NSDate?
     @NSManaged var endTimeStamp: NSDate?
     @NSManaged var identifier: String
     @NSManaged var notes: NSSet
-
 }

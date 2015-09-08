@@ -39,9 +39,8 @@ class IdeaFlowChartView2: UIView
     override func awakeFromNib()
     {
         self.backgroundColor = UIColor.blackColor()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("_refresh"), name: IdeaFlowEvent.Notifications.SelectedDateChanged.rawValue, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserverForIdeaFlowEvents(self, selector: Selector("_refresh"))
     }
     
     deinit
@@ -120,13 +119,11 @@ class IdeaFlowChartView2: UIView
             
             for event in events
             {
-                if event.endTimeStamp != nil
+                if let startPercent = event.startTimeStamp?.timeToPercentOfDay(),
+                    endPercent = event.endTimeStamp?.timeToPercentOfDay()
                 {
                     CGContextBeginPath(context);
                     
-                    let startPercent = event.startTimeStamp.timeToPercentOfDay()
-                    let endPercent = event.endTimeStamp!.timeToPercentOfDay()
-
                     let startAngle = (startPercent * CGFloat(2*M_PI))
                     let endAngle = (endPercent * CGFloat(2*M_PI))
                     

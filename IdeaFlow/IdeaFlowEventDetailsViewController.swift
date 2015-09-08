@@ -30,7 +30,10 @@ class IdeaFlowEventDetailsViewController: UIViewController
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = .ShortStyle
             dateFormatter.timeStyle = .ShortStyle
-            startDate.text = dateFormatter.stringFromDate(event.startTimeStamp)
+            if let startTimeStamp = event.startTimeStamp
+            {
+                startDate.text = dateFormatter.stringFromDate(startTimeStamp)
+            }
             if let endTimeStamp = event.endTimeStamp
             {
                 endDate.text = dateFormatter.stringFromDate(endTimeStamp)

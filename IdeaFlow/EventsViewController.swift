@@ -17,16 +17,16 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     deinit
     {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         fetchResultsController = IdeaFlowEvent.MR_fetchAllGroupedBy(nil, withPredicate: nil, sortedBy: "startTimeStamp", ascending: true)
+        
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: Selector("eventAdded"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
-        notificationCenter.addObserver(self, selector: Selector("eventsDeleted"), name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
+        notificationCenter.addObserverForIdeaFlowEvents(self, selector: Selector("didReceiveIdeaFlowEvent:"))
     }
     
     override func viewWillAppear(animated: Bool)
@@ -55,12 +55,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    func eventAdded()
-    {
-        refresh()
-    }
-    
-    func eventsDeleted()
+    func didReceiveIdeaFlowEvent(notification: NSNotification)
     {
         refresh()
     }

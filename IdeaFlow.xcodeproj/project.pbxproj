@@ -16,18 +16,22 @@
 		84E246101B7E74340042000D /* IdeaFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2460F1B7E74340042000D /* IdeaFlowTests.swift */; };
 		84E2461B1B7E77560042000D /* IdeaFlowModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E246191B7E77560042000D /* IdeaFlowModel.xcdatamodeld */; };
 		84E2461F1B7E82290042000D /* IdeaFlowEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2461E1B7E82290042000D /* IdeaFlowEventCell.swift */; };
-		84E246211B7E82DC0042000D /* IdeaFlowEvent+Stuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E246201B7E82DC0042000D /* IdeaFlowEvent+Stuff.swift */; };
+		84E246211B7E82DC0042000D /* IdeaFlowEvent+AssociatedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E246201B7E82DC0042000D /* IdeaFlowEvent+AssociatedValues.swift */; };
 		84E2462B1B7E8C300042000D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2462A1B7E8C300042000D /* TabBarController.swift */; };
 		84E246321B7EBA590042000D /* NSDate+TimeToPercentOfDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E246311B7EBA590042000D /* NSDate+TimeToPercentOfDay.swift */; };
 		84E246341B7EC8BC0042000D /* UIColor+inverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E246331B7EC8BC0042000D /* UIColor+inverse.swift */; };
 		84E246361B7ED91B0042000D /* IdeaFlowChartView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E246351B7ED91B0042000D /* IdeaFlowChartView2.swift */; };
 		84E246381B7FB6480042000D /* IdeaFlowEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E246371B7FB6480042000D /* IdeaFlowEventDetailsViewController.swift */; };
-		84E2463A1B7FBC020042000D /* IdeaFlowNote+Stuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E246391B7FBC020042000D /* IdeaFlowNote+Stuff.swift */; };
+		84E2463A1B7FBC020042000D /* IdeaFlowNote+CreateNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E246391B7FBC020042000D /* IdeaFlowNote+CreateNote.swift */; };
 		84E2463D1B7FBD290042000D /* IdeaFlowNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2463B1B7FBD290042000D /* IdeaFlowNote.swift */; };
 		84E2463E1B7FBD290042000D /* IdeaFlowEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2463C1B7FBD290042000D /* IdeaFlowEvent.swift */; };
 		84E246401B7FC3050042000D /* NSDate+IsInDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2463F1B7FC3050042000D /* NSDate+IsInDay.swift */; };
 		AA50FE431B9743120065CE01 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FE421B9743120065CE01 /* MenuController.swift */; settings = {ASSET_TAGS = (); }; };
 		AA50FE451B97432C0065CE01 /* MenuControllerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FE441B97432C0065CE01 /* MenuControllerEvent.swift */; settings = {ASSET_TAGS = (); }; };
+		AA6E1EF71B9A7BE200CAB1BC /* IdeaFlowEvent+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EF61B9A7BE200CAB1BC /* IdeaFlowEvent+Notifications.swift */; settings = {ASSET_TAGS = (); }; };
+		AA6E1EF91B9A7C1D00CAB1BC /* IdeaFlowEvent+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EF81B9A7C1D00CAB1BC /* IdeaFlowEvent+Dates.swift */; settings = {ASSET_TAGS = (); }; };
+		AA6E1EFB1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EFA1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift */; settings = {ASSET_TAGS = (); }; };
+		AA6E1EFD1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EFC1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift */; settings = {ASSET_TAGS = (); }; };
 		B7F2A7D67FD665E07D4455A0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DC3E6F8B4DBB9D9AFBE3F6D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -57,19 +61,23 @@
 		84E2460F1B7E74340042000D /* IdeaFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaFlowTests.swift; sourceTree = "<group>"; };
 		84E2461A1B7E77560042000D /* IdeaFlowModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IdeaFlowModel.xcdatamodel; sourceTree = "<group>"; };
 		84E2461E1B7E82290042000D /* IdeaFlowEventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowEventCell.swift; sourceTree = "<group>"; };
-		84E246201B7E82DC0042000D /* IdeaFlowEvent+Stuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+Stuff.swift"; sourceTree = "<group>"; };
+		84E246201B7E82DC0042000D /* IdeaFlowEvent+AssociatedValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+AssociatedValues.swift"; sourceTree = "<group>"; };
 		84E2462A1B7E8C300042000D /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		84E246311B7EBA590042000D /* NSDate+TimeToPercentOfDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeToPercentOfDay.swift"; sourceTree = "<group>"; };
 		84E246331B7EC8BC0042000D /* UIColor+inverse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+inverse.swift"; sourceTree = "<group>"; };
 		84E246351B7ED91B0042000D /* IdeaFlowChartView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowChartView2.swift; sourceTree = "<group>"; };
 		84E246371B7FB6480042000D /* IdeaFlowEventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowEventDetailsViewController.swift; sourceTree = "<group>"; };
-		84E246391B7FBC020042000D /* IdeaFlowNote+Stuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowNote+Stuff.swift"; sourceTree = "<group>"; };
+		84E246391B7FBC020042000D /* IdeaFlowNote+CreateNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowNote+CreateNote.swift"; sourceTree = "<group>"; };
 		84E2463B1B7FBD290042000D /* IdeaFlowNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowNote.swift; sourceTree = "<group>"; };
 		84E2463C1B7FBD290042000D /* IdeaFlowEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowEvent.swift; sourceTree = "<group>"; };
 		84E2463F1B7FC3050042000D /* NSDate+IsInDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+IsInDay.swift"; sourceTree = "<group>"; };
 		AA50FE411B9522420065CE01 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AA50FE421B9743120065CE01 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		AA50FE441B97432C0065CE01 /* MenuControllerEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuControllerEvent.swift; sourceTree = "<group>"; };
+		AA6E1EF61B9A7BE200CAB1BC /* IdeaFlowEvent+Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+Notifications.swift"; sourceTree = "<group>"; };
+		AA6E1EF81B9A7C1D00CAB1BC /* IdeaFlowEvent+Dates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+Dates.swift"; sourceTree = "<group>"; };
+		AA6E1EFA1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+CreateDelete.swift"; sourceTree = "<group>"; };
+		AA6E1EFC1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+Previous.swift"; sourceTree = "<group>"; };
 		DDC5249FD4EEB0EDF331FD76 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,11 +140,15 @@
 				84E245FB1B7E74330042000D /* EventsViewController.swift */,
 				84E246351B7ED91B0042000D /* IdeaFlowChartView2.swift */,
 				84E2463C1B7FBD290042000D /* IdeaFlowEvent.swift */,
-				84E246201B7E82DC0042000D /* IdeaFlowEvent+Stuff.swift */,
+				84E246201B7E82DC0042000D /* IdeaFlowEvent+AssociatedValues.swift */,
+				AA6E1EFC1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift */,
+				AA6E1EFA1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift */,
+				AA6E1EF81B9A7C1D00CAB1BC /* IdeaFlowEvent+Dates.swift */,
+				AA6E1EF61B9A7BE200CAB1BC /* IdeaFlowEvent+Notifications.swift */,
 				84E2461E1B7E82290042000D /* IdeaFlowEventCell.swift */,
 				84E246371B7FB6480042000D /* IdeaFlowEventDetailsViewController.swift */,
 				84E2463B1B7FBD290042000D /* IdeaFlowNote.swift */,
-				84E246391B7FBC020042000D /* IdeaFlowNote+Stuff.swift */,
+				84E246391B7FBC020042000D /* IdeaFlowNote+CreateNote.swift */,
 				AA50FE421B9743120065CE01 /* MenuController.swift */,
 				AA50FE441B97432C0065CE01 /* MenuControllerEvent.swift */,
 				84E2463F1B7FC3050042000D /* NSDate+IsInDay.swift */,
@@ -348,19 +360,23 @@
 				84E246361B7ED91B0042000D /* IdeaFlowChartView2.swift in Sources */,
 				84E246341B7EC8BC0042000D /* UIColor+inverse.swift in Sources */,
 				84E2462B1B7E8C300042000D /* TabBarController.swift in Sources */,
-				84E2463A1B7FBC020042000D /* IdeaFlowNote+Stuff.swift in Sources */,
+				84E2463A1B7FBC020042000D /* IdeaFlowNote+CreateNote.swift in Sources */,
 				84E245F81B7E74330042000D /* AppDelegate.swift in Sources */,
 				84E2461B1B7E77560042000D /* IdeaFlowModel.xcdatamodeld in Sources */,
 				84E2463D1B7FBD290042000D /* IdeaFlowNote.swift in Sources */,
+				AA6E1EF71B9A7BE200CAB1BC /* IdeaFlowEvent+Notifications.swift in Sources */,
 				AA50FE431B9743120065CE01 /* MenuController.swift in Sources */,
 				AA50FE451B97432C0065CE01 /* MenuControllerEvent.swift in Sources */,
 				84E246381B7FB6480042000D /* IdeaFlowEventDetailsViewController.swift in Sources */,
 				84E246401B7FC3050042000D /* NSDate+IsInDay.swift in Sources */,
+				AA6E1EFB1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift in Sources */,
 				84E245FA1B7E74330042000D /* ChartViewController.swift in Sources */,
+				AA6E1EF91B9A7C1D00CAB1BC /* IdeaFlowEvent+Dates.swift in Sources */,
 				84E246321B7EBA590042000D /* NSDate+TimeToPercentOfDay.swift in Sources */,
+				AA6E1EFD1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift in Sources */,
 				84E2463E1B7FBD290042000D /* IdeaFlowEvent.swift in Sources */,
 				84E2461F1B7E82290042000D /* IdeaFlowEventCell.swift in Sources */,
-				84E246211B7E82DC0042000D /* IdeaFlowEvent+Stuff.swift in Sources */,
+				84E246211B7E82DC0042000D /* IdeaFlowEvent+AssociatedValues.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

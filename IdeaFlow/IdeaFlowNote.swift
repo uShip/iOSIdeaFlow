@@ -10,7 +10,8 @@ import Foundation
 import CoreData
 
 @objc(IdeaFlowNote)
-class IdeaFlowNote: NSManagedObject {
+class IdeaFlowNote: NSManagedObject
+{
 
     @NSManaged var timeStamp: NSDate
     @NSManaged var noteContent: String

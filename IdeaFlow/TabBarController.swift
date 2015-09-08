@@ -23,6 +23,8 @@ class TabBarController : UITabBarController
         
         let button = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("addButtonTapped"))
         self.navigationItem.setRightBarButtonItem(button, animated: false)
+        
+        _observeNotifications()
     }
     
     deinit
@@ -33,33 +35,57 @@ class TabBarController : UITabBarController
     
     private func _observeNotifications()
     {
-        //Event Lifecycle
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: Selector("eventAdded"), name: IdeaFlowEvent.Notifications.EventAdded.rawValue, object: nil)
-        notificationCenter.addObserver(self, selector: Selector("eventsDeleted"), name: IdeaFlowEvent.Notifications.AllEventsDeleted.rawValue, object: nil)
-        
-        //Menu Items
-        _observeMenuControllerEvent(.ShowMenu, selector: Selector("didShowMenu"))
-        _observeMenuControllerEvent(.DismissMenu, selector: Selector("didDismissMenu"))
-        _observeMenuControllerItemSelectedEvent(.Troubleshooting)
-        _observeMenuControllerItemSelectedEvent(.Rework)
-        _observeMenuControllerItemSelectedEvent(.Learning)
-        _observeMenuControllerItemSelectedEvent(.Productivity)
-        _observeMenuControllerItemSelectedEvent(.AddDemoEvents)
-        _observeMenuControllerItemSelectedEvent(.DeleteAll)
-        _observeMenuControllerItemSelectedEvent(.Cancel)
+        notificationCenter.addObserverForIdeaFlowEvents(self, selector: Selector("didReceiveIdeaFlowEvent:"))
+        notificationCenter.addObserverForMenuControllerEvents(self, selector: Selector("didReceiveMenuControllerEvent:"))
     }
     
-    private func _observeMenuControllerItemSelectedEvent(menuItem: MenuControllerItem)
+    func didReceiveIdeaFlowEvent(notification: NSNotification)
     {
-        _observeMenuControllerEvent(.MenuItemSelected(menuItem: menuItem), selector: Selector("didSelect\(menuItem.rawValue)"))
+        if let event = notification.convertToIdeaFlowEventNotification()
+        {
+            switch event
+            {
+            case .AllEventsDeleted:
+                MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+            case .EventAdded:
+                MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+            case .SelectedDateChanged:
+                break
+            }
+        }
     }
     
-    private func _observeMenuControllerEvent(event: MenuControllerEvent, selector: Selector)
+    func didReceiveMenuControllerEvent(notification: NSNotification)
     {
-        let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: selector, name: event.toString(), object: nil)
+        if let menuControllerEvent = notification.convertToMenuControllerEvent()
+        {
+            switch menuControllerEvent
+            {
+            case let .MenuItemSelected(menuItem: menuItem):
+                switch menuItem
+                {
+                case .Troubleshooting:
+                    addEvent(.Troubleshooting)
+                case .Rework:
+                    addEvent(.Rework)
+                case .Productivity:
+                    addEvent(.Productivity)
+                case .Learning:
+                    addEvent(.Learning)
+                case .DeleteAll:
+                    deleteAllEvents()
+                case .AddDemoEvents:
+                    createDemoEvents()
+                default:
+                    break
+                }
+            default:
+                break
+            }
+        }
     }
+    
     
     func addButtonTapped()
     {
@@ -83,16 +109,5 @@ class TabBarController : UITabBarController
     {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         IdeaFlowEvent.deleteAllEvents()
-    }
-
-    
-    func eventAdded()
-    {
-        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
-    }
-    
-    func eventsDeleted()
-    {
-        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
     }
 }
