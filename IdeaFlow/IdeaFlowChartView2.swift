@@ -223,9 +223,9 @@ class IdeaFlowChartView2: UIView
             {
                 // Font name must be written exactly the same as the system stores it (some names are hyphenated, some aren't) and must exist on the user's device. Otherwise there will be a crash. (In real use checks and fallbacks would be created.) For a list of iOS 7 fonts see here: http://support.apple.com/en-us/ht5878
                 let fontSize = (radius/CGFloat(5)) / CGFloat(sides/12)
-                let aFont = UIFont(name: "Helvetica", size: fontSize)
+                let aFont = UIFont.systemFontOfSize(fontSize)
                 // create a dictionary of attributes to be applied to the string
-                let attr:CFDictionaryRef = [NSFontAttributeName:aFont!,NSForegroundColorAttributeName:UIColor.whiteColor()]
+                let attr:CFDictionaryRef = [NSFontAttributeName:aFont,NSForegroundColorAttributeName:UIColor.whiteColor()]
                 // create the attributed string
                 let text = CFAttributedStringCreate(nil, p.index.description, attr)
                 // create the line of text
@@ -235,7 +235,7 @@ class IdeaFlowChartView2: UIView
                 // set the line width to stroke the text with
                 CGContextSetLineWidth(context, 1.5)
                 // set the drawing mode to stroke
-                CGContextSetTextDrawingMode(context, CGTextDrawingMode.Stroke)
+                CGContextSetTextDrawingMode(context, CGTextDrawingMode.Fill)
                 // Set text position and draw the line into the graphics context, text length and height is adjusted for
                 let xn = p.element.x - bounds.width/2
                 let yn = p.element.y - bounds.midY
