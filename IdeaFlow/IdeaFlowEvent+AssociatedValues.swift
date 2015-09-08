@@ -18,55 +18,67 @@ extension IdeaFlowEvent
         case Troubleshooting = "Troubleshooting"
         case Learning = "Learning"
         case Rework = "Rework"
+        case Pause = "Pause"
         case Unknown = "Unknown"
+        
+        init(int: Int32)
+        {
+            switch int
+            {
+            case 1:
+                self = .Productivity
+            case 2:
+                self = .Troubleshooting
+            case 3:
+                self = .Learning
+            case 4:
+                self = .Rework
+            case 5:
+                self = .Pause
+            default:
+                self = .Unknown
+            }
+        }
         
         func intValue() -> Int32
         {
             switch (self)
             {
-            case .Productivity:
-                return 0
-            case .Troubleshooting:
-                return 1
-            case .Learning:
-                return 2
-            case .Rework:
-                return 3
             case .Unknown:
+                return 0
+            case .Productivity:
+                return 1
+            case .Troubleshooting:
+                return 2
+            case .Learning:
+                return 3
+            case .Rework:
                 return 4
+            case .Pause:
+                return 5
             }
         }
     }
     
     func eventTypeName() -> String
     {
-        switch eventType.integerValue
-        {
-        case 0:
-            return EventType.Productivity.rawValue
-        case 1:
-            return EventType.Troubleshooting.rawValue
-        case 2:
-            return EventType.Learning.rawValue
-        case 3:
-            return EventType.Rework.rawValue
-        default:
-            return EventType.Unknown.rawValue
-        }
+        return EventType(int: eventType.intValue).rawValue
     }
     
     func eventTypeColor() -> UIColor
     {
-        switch eventType.integerValue
+        switch EventType(int: eventType.intValue)
         {
-        case 0:
-            return UIColor.lightGrayColor()
-        case 1:
+        case .Productivity:
+            return UIColor.whiteColor()
+        case .Troubleshooting:
             return UIColor.redColor()
-        case 2:
-            return UIColor.purpleColor()
-        case 3:
-            return UIColor.orangeColor()
+        case .Learning:
+            return UIColor.blueColor()
+        case .Rework:
+            return UIColor.yellowColor()
+        case .Pause:
+            return UIColor.lightGrayColor()
         default:
             return UIColor.magentaColor()
         }
