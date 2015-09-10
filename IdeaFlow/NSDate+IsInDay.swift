@@ -10,6 +10,20 @@ import Foundation
 
 extension NSDate
 {
+    class func todayOneSecondBeforeMidnight() -> NSDate?
+    {
+        let todayComponents = NSDate().dayComponents()
+        
+        let comps = NSDateComponents()
+        comps.year = todayComponents.year
+        comps.month = todayComponents.month
+        comps.day = todayComponents.day
+        comps.hour = 23
+        comps.minute = 59
+        comps.second = 59
+        return NSCalendar.currentCalendar().dateFromComponents(comps)
+    }
+    
     func dateOffsetBy(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> NSDate?
     {
         let deltaComps = NSDateComponents()
