@@ -89,11 +89,29 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if editingStyle == UITableViewCellEditingStyle.Delete
+        {
+            let ideaFlowEvent = fetchResultsController?.objectAtIndexPath(indexPath) as! IdeaFlowEvent
+            ideaFlowEvent.MR_deleteEntity()
+            performFetch()
+            tableView.reloadData()
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
         if let destination = segue.destinationViewController as? IdeaFlowEventDetailsViewController, cell = sender as? IdeaFlowEventCell
         {
             destination.eventIdentifier = cell.eventIdentifier

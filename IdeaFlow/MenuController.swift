@@ -43,6 +43,7 @@ class MenuController
         _addMenuItem(.Troubleshooting)
         _addMenuItem(.Learning)
         _addMenuItem(.Rework)
+        _addMenuItem(.Pause)
         _addMenuItem(.AddDemoEvents)
         _addMenuItem(.DeleteAll, style: .Destructive)
         _addMenuItem(.Cancel, style: .Cancel)

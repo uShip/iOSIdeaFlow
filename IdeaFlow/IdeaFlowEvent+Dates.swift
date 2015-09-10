@@ -77,8 +77,19 @@ extension IdeaFlowEvent
     
     class func getEventsForSelectedDate() -> [IdeaFlowEvent]?
     {
-        let predicate = NSPredicate(format:"%@ <= startTimeStamp AND %@ > endTimeStamp", selectedDayMidnight()!, selectedDayBeforeMidnight()!)
-        return IdeaFlowEvent.MR_findAllWithPredicate(predicate) as? [IdeaFlowEvent]
+        let predicate = NSPredicate(format:"%@ <= startTimeStamp AND startTimeStamp < %@", selectedDayMidnight()!, selectedDayBeforeMidnight()!)
+        if let events = IdeaFlowEvent.MR_findAllWithPredicate(predicate) as? [IdeaFlowEvent]
+        {
+            #if DEBUG
+                print("events for \(NSDate()):")
+                for event in events
+                {
+                    print("\t \(event.startTimeStamp) - \(IdeaFlowEvent.EventType(int:event.eventType.intValue).rawValue)")
+                }
+            #endif
+            return events
+        }
+        return nil
     }
     
     class func _getTodayDateWithTime(hour: Int, minute: Int, second: Int = 0) -> NSDate?

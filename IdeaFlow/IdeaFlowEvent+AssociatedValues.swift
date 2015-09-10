@@ -70,15 +70,15 @@ extension IdeaFlowEvent
         switch EventType(int: eventType.intValue)
         {
         case .Productivity:
-            return UIColor.whiteColor()
+            return UIColor.lightGrayColor()
         case .Troubleshooting:
             return UIColor.redColor()
         case .Learning:
             return UIColor.blueColor()
         case .Rework:
-            return UIColor.yellowColor()
+            return UIColor.orangeColor()
         case .Pause:
-            return UIColor.lightGrayColor()
+            return UIColor.blackColor()
         default:
             return UIColor.magentaColor()
         }

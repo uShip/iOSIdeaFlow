@@ -12,15 +12,17 @@ extension IdeaFlowEvent
 {
     func getPreviousEvent() -> IdeaFlowEvent?
     {
-        if let startTimeStamp = startTimeStamp
+        return IdeaFlowEvent.getPreviousEvent(startTimeStamp)
+    }
+    
+    class func getPreviousEvent(startTimeStamp: NSDate) -> IdeaFlowEvent?
+    {
+        let predicate = NSPredicate(format: "startTimeStamp < %@", argumentArray: [startTimeStamp])
+        if let pastEvents = IdeaFlowEvent.MR_findAllSortedBy("startTimeStamp", ascending: false, withPredicate: predicate) as? [IdeaFlowEvent]
         {
-            let predicate = NSPredicate(format: "startTimeStamp < %@", argumentArray: [startTimeStamp])
-            if let pastEvents = IdeaFlowEvent.MR_findAllSortedBy("startTimeStamp", ascending: false, withPredicate: predicate) as? [IdeaFlowEvent]
+            if pastEvents.count > 0
             {
-                if pastEvents.count > 0
-                {
-                    return pastEvents[0]
-                }
+                return pastEvents[0]
             }
         }
         return nil
@@ -28,15 +30,12 @@ extension IdeaFlowEvent
     
     func getNextEvent() -> IdeaFlowEvent?
     {
-        if let startTimeStamp = startTimeStamp
+        let predicate = NSPredicate(format: "startTimeStamp > %@", argumentArray: [startTimeStamp])
+        if let nextEvents = IdeaFlowEvent.MR_findAllSortedBy("startTimeStamp", ascending: true, withPredicate: predicate) as? [IdeaFlowEvent]
         {
-            let predicate = NSPredicate(format: "startTimeStamp > %@", argumentArray: [startTimeStamp])
-            if let nextEvents = IdeaFlowEvent.MR_findAllSortedBy("startTimeStamp", ascending: true, withPredicate: predicate) as? [IdeaFlowEvent]
+            if nextEvents.count > 0
             {
-                if nextEvents.count > 0
-                {
-                    return nextEvents[0]
-                }
+                return nextEvents[0]
             }
         }
         return nil

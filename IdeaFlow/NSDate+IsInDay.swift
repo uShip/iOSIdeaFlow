@@ -10,9 +10,9 @@ import Foundation
 
 extension NSDate
 {
-    class func todayOneSecondBeforeMidnight() -> NSDate?
+    func oneSecondBeforeMidnight() -> NSDate?
     {
-        let todayComponents = NSDate().dayComponents()
+        let todayComponents = self.dayComponents()
         
         let comps = NSDateComponents()
         comps.year = todayComponents.year

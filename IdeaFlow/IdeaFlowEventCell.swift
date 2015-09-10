@@ -21,20 +21,10 @@ class IdeaFlowEventCell: UITableViewCell
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .MediumStyle
         
-        var endDateString = ""
-        if let endDate = event.endTimeStamp
-        {
-            endDateString = "- \(dateFormatter.stringFromDate(endDate))"
-        }
-        
-        var startDateString = ""
-        if let startDate = event.startTimeStamp
-        {
-            startDateString = "\(dateFormatter.stringFromDate(startDate))"
-        }
+        let startDateString = "\(dateFormatter.stringFromDate(event.startTimeStamp))"
         
         textLabel?.text = "\(event.eventTypeName())"
-        detailTextLabel?.text = "\(startDateString)\(endDateString)"
+        detailTextLabel?.text = "\(startDateString)"
         
         backgroundColor = event.eventTypeColor()
         textLabel?.textColor = backgroundColor?.inverseColor()

@@ -12,13 +12,13 @@ extension CGFloat
 {
     func degreesToRadians() -> CGFloat
     {
-        return self * CGFloat(0.0174532925)//CGFloat(M_PI) / CGFloat(180)
+        return self * CGFloat(0.0174532925)
     }
 }
 
 class IdeaFlowChartView2: UIView
 {
-    var lineWidth :CGFloat //= CGFloat(20)
+    var lineWidth :CGFloat
     {
         get{
             return fmin(centerPoint.x,centerPoint.y) - radiusInset
@@ -28,6 +28,8 @@ class IdeaFlowChartView2: UIView
     let radiusInset = CGFloat(5)
     var centerPoint = CGPoint(x: 0, y: 0)
     var radius: CGFloat?
+    let fontColor = UIColor.whiteColor()
+    let tickmarkColor = UIColor.whiteColor()
     
     var permanentOffset = CGFloat(0)
     var permanentOffsetPoint = CGPointZero
@@ -73,44 +75,10 @@ class IdeaFlowChartView2: UIView
         drawHoursText(context!, rect: rect, x: centerPoint.x, y: centerPoint.y, radius: radius!, sides: hours, color: UIColor.whiteColor())
     }
     
-    private func drawCross(context: CGContextRef)
-    {
-        CGContextSaveGState(context)
-        _rotateContextNegative90Degrees(context)
-        
-        CGContextMoveToPoint(context, centerPoint.x, 0)
-        CGContextAddLineToPoint(context, centerPoint.x, bounds.height)
-        CGContextMoveToPoint(context, 0, centerPoint.y)
-        CGContextAddLineToPoint(context, bounds.width, centerPoint.y)
-        
-        CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
-        CGContextSetLineWidth(context, 0.5)
-        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
-        
-        CGContextRestoreGState(context)
-    }
-    
-    private func drawCrossTranslated(context: CGContextRef)
-    {
-        CGContextSaveGState(context)
-        _rotateContextNegative90Degrees(context)
-        
-        CGContextMoveToPoint(context, centerPoint.x, 0)
-        CGContextAddLineToPoint(context, centerPoint.x, bounds.height)
-        CGContextMoveToPoint(context, 0, centerPoint.y)
-        CGContextAddLineToPoint(context, bounds.width, centerPoint.y)
-        
-        CGContextSetStrokeColorWithColor(context, UIColor.orangeColor().CGColor)
-        CGContextSetLineWidth(context, 0.5)
-        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
-
-        CGContextRestoreGState(context)
-    }
-    
     private func drawEventRings(context: CGContextRef)
     {
         if let events = IdeaFlowEvent.getEventsForSelectedDate()
-        {
+        {   
             var index : CGFloat = 0
             let currentRadius : CGFloat = radius! - lineWidth/2.0
             
@@ -119,22 +87,24 @@ class IdeaFlowChartView2: UIView
             
             for event in events
             {
-                if let startPercent = event.startTimeStamp?.timeToPercentOfDay(),
-                    endPercent = event.endTimeStamp?.timeToPercentOfDay()
-                {
-                    CGContextBeginPath(context);
-                    
-                    let startAngle = (startPercent * CGFloat(2*M_PI))
-                    let endAngle = (endPercent * CGFloat(2*M_PI))
-                    
-                    CGContextAddArc(context, centerPoint.x, centerPoint.y, currentRadius, startAngle, endAngle, 0)
-                    
-                    CGContextSetStrokeColorWithColor(context, event.eventTypeColor().CGColor)
-                    CGContextSetLineWidth(context, lineWidth)
-                    CGContextDrawPath(context, CGPathDrawingMode.Stroke)
-                    
-                    index = index + 1
-                }
+                CGContextBeginPath(context);
+                
+                let startPercent = event.startTimeStamp.timeToPercentOfDay()
+                //always draw to the end of the day.  if there is a next event for the day, it will draw over the appropriate segment
+                let endTimeStamp = event.startTimeStamp.oneSecondBeforeMidnight()
+                
+                let endPercent = endTimeStamp!.timeToPercentOfDay()
+                
+                let startAngle = (startPercent * CGFloat(2*M_PI))
+                let endAngle = (endPercent * CGFloat(2*M_PI))
+                
+                CGContextAddArc(context, centerPoint.x, centerPoint.y, currentRadius, startAngle, endAngle, 0)
+                
+                CGContextSetStrokeColorWithColor(context, event.eventTypeColor().CGColor)
+                CGContextSetLineWidth(context, lineWidth)
+                CGContextDrawPath(context, CGPathDrawingMode.Stroke)
+                
+                index = index + 1
             }
             
             CGContextRestoreGState(context)
@@ -157,11 +127,11 @@ class IdeaFlowChartView2: UIView
             if i % 4 == 0
             {
                 // if an hour position we want a line slightly longer
-                drawSecondMarker(context, x: radius!-15, y:0, radius:radius!, color: UIColor.whiteColor())
+                drawSecondMarker(context, x: radius!-15, y:0, radius:radius!, color: tickmarkColor)
             }
             else
             {
-                drawSecondMarker(context, x: radius!-10, y:0, radius:radius!, color: UIColor.whiteColor())
+                drawSecondMarker(context, x: radius!-10, y:0, radius:radius!, color: tickmarkColor)
             }
             // restore state before next translation
             CGContextRestoreGState(context)
@@ -225,7 +195,7 @@ class IdeaFlowChartView2: UIView
                 let fontSize = (radius/CGFloat(5)) / CGFloat(sides/12)
                 let aFont = UIFont.systemFontOfSize(fontSize)
                 // create a dictionary of attributes to be applied to the string
-                let attr:CFDictionaryRef = [NSFontAttributeName:aFont,NSForegroundColorAttributeName:UIColor.whiteColor()]
+                let attr:CFDictionaryRef = [NSFontAttributeName:aFont,NSForegroundColorAttributeName:fontColor]
                 // create the attributed string
                 let text = CFAttributedStringCreate(nil, p.index.description, attr)
                 // create the line of text

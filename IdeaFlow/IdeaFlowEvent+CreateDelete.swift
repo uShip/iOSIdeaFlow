@@ -14,25 +14,23 @@ extension IdeaFlowEvent
     class func addNewEvent(eventType: EventType)
     {
         let startDate = NSDate()
-        let newEvent = createNewEvent(eventType, startDate: startDate, endDate: nil)
         
-        if let event = newEvent.getPreviousEvent()
+        if let previousEvent = getPreviousEvent(startDate)
         {
-            event.endTimeStamp = startDate
+            if EventType(int:previousEvent.eventType.intValue) == eventType
+            {
+                return
+            }
         }
         
-        if let event = newEvent.getNextEvent()
-        {
-            event.startTimeStamp = nil
-        }
+        createNewEvent(eventType, startDate: startDate)
     }
     
-    class func createNewEvent(eventType: EventType, startDate: NSDate, endDate: NSDate?) -> IdeaFlowEvent
+    class func createNewEvent(eventType: EventType, startDate: NSDate) -> IdeaFlowEvent
     {
         
         let newEvent = IdeaFlowEvent.MR_createEntity()
         newEvent.startTimeStamp = startDate
-        newEvent.endTimeStamp = endDate
         newEvent.identifier = NSUUID().UUIDString
         newEvent.eventType = NSNumber(int: eventType.intValue())
         
@@ -45,15 +43,16 @@ extension IdeaFlowEvent
     
     class func createDemoEvents()
     {
-        createNewEvent(.Troubleshooting, startDate: _getTodayDateWithTime(1, minute: 15)!, endDate: _getTodayDateWithTime(1, minute: 50)!)
-        createNewEvent(.Learning, startDate: _getTodayDateWithTime(1, minute: 50)!, endDate: _getTodayDateWithTime(5, minute: 30)!)
-        createNewEvent(.Rework, startDate: _getTodayDateWithTime(5, minute: 30)!, endDate: _getTodayDateWithTime(5, minute: 45)!)
-        createNewEvent(.Learning, startDate: _getTodayDateWithTime(5, minute: 45)!, endDate: _getTodayDateWithTime(20, minute: 30)!)
+        createNewEvent(.Troubleshooting, startDate: _getTodayDateWithTime(1, minute: 15)!)
+        createNewEvent(.Learning, startDate: _getTodayDateWithTime(1, minute: 50)!)
+        createNewEvent(.Rework, startDate: _getTodayDateWithTime(5, minute: 30)!)
+        createNewEvent(.Learning, startDate: _getTodayDateWithTime(5, minute: 45)!)
         
-        createNewEvent(.Troubleshooting, startDate: _getTomorrowDateWithTime(4, minute: 15)!, endDate: _getTomorrowDateWithTime(4, minute: 50)!)
-        createNewEvent(.Learning, startDate: _getTomorrowDateWithTime(4, minute: 50)!, endDate: _getTomorrowDateWithTime(5, minute: 30)!)
-        createNewEvent(.Productivity, startDate: _getTomorrowDateWithTime(5, minute: 30)!, endDate: _getTomorrowDateWithTime(8, minute: 0)!)
-        createNewEvent(.Rework, startDate: _getTomorrowDateWithTime(8, minute: 0)!, endDate: _getTomorrowDateWithTime(8, minute: 30)!)
+        createNewEvent(.Troubleshooting, startDate: _getTomorrowDateWithTime(4, minute: 15)!)
+        createNewEvent(.Learning, startDate: _getTomorrowDateWithTime(4, minute: 50)!)
+        createNewEvent(.Productivity, startDate: _getTomorrowDateWithTime(5, minute: 30)!)
+        createNewEvent(.Rework, startDate: _getTomorrowDateWithTime(8, minute: 0)!)
+        createNewEvent(.Pause, startDate: _getTomorrowDateWithTime(16, minute: 0)!)
         
         NSManagedObjectContext.MR_defaultContext().MR_saveToPersistentStoreAndWait()
         

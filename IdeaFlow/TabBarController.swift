@@ -73,6 +73,8 @@ class TabBarController : UITabBarController
                     addEvent(.Productivity)
                 case .Learning:
                     addEvent(.Learning)
+                case .Pause:
+                    addEvent(.Pause)
                 case .DeleteAll:
                     deleteAllEvents()
                 case .AddDemoEvents:
