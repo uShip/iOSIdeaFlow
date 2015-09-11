@@ -79,6 +79,8 @@ class TabBarController : UITabBarController
                     deleteAllEvents()
                 case .AddDemoEvents:
                     createDemoEvents()
+                case .ExportAll:
+                    exportAllEvents()
                 default:
                     break
                 }
@@ -111,5 +113,13 @@ class TabBarController : UITabBarController
     {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         IdeaFlowEvent.deleteAllEvents()
+    }
+    
+    func exportAllEvents()
+    {
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        IdeaFlowDataExporter().exportAll { [weak self] () -> () in
+            MBProgressHUD.hideAllHUDsForView(self?.view, animated: true)
+        }
     }
 }

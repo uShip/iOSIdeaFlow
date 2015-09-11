@@ -77,7 +77,7 @@ class IdeaFlowChartView2: UIView
     
     private func drawEventRings(context: CGContextRef)
     {
-        if let events = IdeaFlowEvent.getEventsForSelectedDate()
+        if let events = IdeaFlowEvent.getEventsForSelectedDay()
         {   
             var index : CGFloat = 0
             let currentRadius : CGFloat = radius! - lineWidth/2.0

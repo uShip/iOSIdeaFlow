@@ -67,6 +67,7 @@ enum MenuControllerItem: String
     case Productivity = "Productivity"
     case Pause = "Pause"
     case AddDemoEvents = "Add Demo Events"
+    case ExportAll = "Export All"
     case DeleteAll = "Delete All"
     case Cancel = "Cancel"
 }
@@ -83,6 +84,7 @@ extension NSNotificationCenter
         _observeMenuControllerItemSelectedEvent(observer, menuItem:.Productivity, selector: selector)
         _observeMenuControllerItemSelectedEvent(observer, menuItem:.Pause, selector: selector)
         _observeMenuControllerItemSelectedEvent(observer, menuItem:.AddDemoEvents, selector: selector)
+        _observeMenuControllerItemSelectedEvent(observer, menuItem:.ExportAll, selector: selector)
         _observeMenuControllerItemSelectedEvent(observer, menuItem:.DeleteAll, selector: selector)
         _observeMenuControllerItemSelectedEvent(observer, menuItem:.Cancel, selector: selector)
     }

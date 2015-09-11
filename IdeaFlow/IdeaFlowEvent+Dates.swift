@@ -15,32 +15,12 @@ extension IdeaFlowEvent
     
     class func selectedDayMidnight() -> NSDate?
     {
-        let today = getSelectedDate().dayComponents()
-        
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let dateComponents = NSDateComponents()
-        dateComponents.second = 0
-        dateComponents.minute = 0
-        dateComponents.hour = 0
-        dateComponents.day = today.day
-        dateComponents.month = today.month
-        dateComponents.year = today.year
-        return calendar?.dateFromComponents(dateComponents)
+        return getSelectedDate().midnight()
     }
     
     class func selectedDayBeforeMidnight() -> NSDate?
     {
-        let today = getSelectedDate().dayComponents()
-        
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let dateComponents = NSDateComponents()
-        dateComponents.second = 59
-        dateComponents.minute = 59
-        dateComponents.hour = 23
-        dateComponents.day = today.day
-        dateComponents.month = today.month
-        dateComponents.year = today.year
-        return calendar?.dateFromComponents(dateComponents)
+        return getSelectedDate().oneSecondBeforeMidnight()
     }
     
     class func selectedDayWithOffset(offset: Int) -> NSDate?
@@ -75,9 +55,18 @@ extension IdeaFlowEvent
         NSNotificationCenter.defaultCenter().postNotificationName(Notification.SelectedDateChanged.rawValue, object: self)
     }
     
-    class func getEventsForSelectedDate() -> [IdeaFlowEvent]?
+    class func getEventsForSelectedDay() -> [IdeaFlowEvent]?
     {
-        let predicate = NSPredicate(format:"%@ <= startTimeStamp AND startTimeStamp < %@", selectedDayMidnight()!, selectedDayBeforeMidnight()!)
+        if let selectedDate = private_IdeaFlowSelectedDate
+        {
+            return getEventsForDay(selectedDate)
+        }
+        return nil
+    }
+    
+    class func getEventsForDay(day: NSDate) -> [IdeaFlowEvent]?
+    {
+        let predicate = NSPredicate(format:"%@ <= startTimeStamp AND startTimeStamp < %@", day.midnight()!, day.oneSecondBeforeMidnight()!)
         if let events = IdeaFlowEvent.MR_findAllWithPredicate(predicate) as? [IdeaFlowEvent]
         {
             #if DEBUG
@@ -89,6 +78,32 @@ extension IdeaFlowEvent
             #endif
             return events
         }
+        return nil
+    }
+    
+    class func getDatesThatHaveEvents() -> [NSDate]?
+    {
+        let fetchController = IdeaFlowEvent.MR_fetchAllGroupedBy("startTimeStamp", withPredicate: nil, sortedBy: "startTimeStamp", ascending: true)
+        do
+        {
+            var dates = [NSDate]()
+            
+            try fetchController.performFetch()
+            for section in fetchController.sections!
+            {
+                if let event = section.objects?.first as? IdeaFlowEvent
+                {
+                    dates.append(event.startTimeStamp)
+                }
+            }
+            return dates
+        }
+        catch
+        {
+            //TODO: report error to UI
+            print("[--ERROR--]: \(error)")
+        }
+        
         return nil
     }
     

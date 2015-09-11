@@ -45,6 +45,7 @@ class MenuController
         _addMenuItem(.Rework)
         _addMenuItem(.Pause)
         _addMenuItem(.AddDemoEvents)
+        _addMenuItem(.ExportAll)
         _addMenuItem(.DeleteAll, style: .Destructive)
         _addMenuItem(.Cancel, style: .Cancel)
     }

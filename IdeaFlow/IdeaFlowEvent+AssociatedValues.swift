@@ -83,4 +83,23 @@ extension IdeaFlowEvent
             return UIColor.magentaColor()
         }
     }
+    
+    class func csvColumnNames() -> String
+    {
+        return "startTimeStamp, eventType, identifier"
+    }
+    
+    func asCSV() -> String
+    {
+        let eventTypeString = EventType(int: eventType.intValue).rawValue
+        let startTimeStampString = "\(startTimeStamp)"
+
+        //TODO: include notes
+//        for note in notes
+//        {
+//            
+//        }
+        
+        return "\(startTimeStampString),\(eventTypeString),\(identifier)"
+    }
 }

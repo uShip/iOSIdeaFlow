@@ -32,6 +32,7 @@
 		AA6E1EF91B9A7C1D00CAB1BC /* IdeaFlowEvent+Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EF81B9A7C1D00CAB1BC /* IdeaFlowEvent+Dates.swift */; settings = {ASSET_TAGS = (); }; };
 		AA6E1EFB1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EFA1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift */; settings = {ASSET_TAGS = (); }; };
 		AA6E1EFD1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EFC1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift */; settings = {ASSET_TAGS = (); }; };
+		AA6E1EFF1BA1CDD600CAB1BC /* IdeaFlowDataExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EFE1BA1CDD600CAB1BC /* IdeaFlowDataExporter.swift */; settings = {ASSET_TAGS = (); }; };
 		B7F2A7D67FD665E07D4455A0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DC3E6F8B4DBB9D9AFBE3F6D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		AA6E1EF81B9A7C1D00CAB1BC /* IdeaFlowEvent+Dates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+Dates.swift"; sourceTree = "<group>"; };
 		AA6E1EFA1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+CreateDelete.swift"; sourceTree = "<group>"; };
 		AA6E1EFC1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+Previous.swift"; sourceTree = "<group>"; };
+		AA6E1EFE1BA1CDD600CAB1BC /* IdeaFlowDataExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowDataExporter.swift; sourceTree = "<group>"; };
 		DDC5249FD4EEB0EDF331FD76 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +156,7 @@
 				84E2463F1B7FC3050042000D /* NSDate+IsInDay.swift */,
 				84E246311B7EBA590042000D /* NSDate+TimeToPercentOfDay.swift */,
 				84E2462A1B7E8C300042000D /* TabBarController.swift */,
+				AA6E1EFE1BA1CDD600CAB1BC /* IdeaFlowDataExporter.swift */,
 				84E246331B7EC8BC0042000D /* UIColor+inverse.swift */,
 			);
 			path = IdeaFlow;
@@ -252,7 +255,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = uShip;
 				TargetAttributes = {
 					84E245F11B7E74330042000D = {
@@ -361,6 +364,7 @@
 				84E246341B7EC8BC0042000D /* UIColor+inverse.swift in Sources */,
 				84E2462B1B7E8C300042000D /* TabBarController.swift in Sources */,
 				84E2463A1B7FBC020042000D /* IdeaFlowNote+CreateNote.swift in Sources */,
+				AA6E1EFF1BA1CDD600CAB1BC /* IdeaFlowDataExporter.swift in Sources */,
 				84E245F81B7E74330042000D /* AppDelegate.swift in Sources */,
 				84E2461B1B7E77560042000D /* IdeaFlowModel.xcdatamodeld in Sources */,
 				84E2463D1B7FBD290042000D /* IdeaFlowNote.swift in Sources */,
@@ -439,6 +443,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -512,6 +517,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = IdeaFlow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uShip.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -523,6 +529,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = IdeaFlow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uShip.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -541,6 +548,7 @@
 				);
 				INFOPLIST_FILE = IdeaFlowTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uShip.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IdeaFlow.app/IdeaFlow";
 			};
@@ -556,6 +564,7 @@
 				);
 				INFOPLIST_FILE = IdeaFlowTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uShip.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IdeaFlow.app/IdeaFlow";
 			};

@@ -12,7 +12,6 @@ import CoreData
 @objc(IdeaFlowNote)
 class IdeaFlowNote: NSManagedObject
 {
-
     @NSManaged var timeStamp: NSDate
     @NSManaged var noteContent: String
     @NSManaged var event: IdeaFlowEvent

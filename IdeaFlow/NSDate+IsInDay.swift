@@ -10,6 +10,21 @@ import Foundation
 
 extension NSDate
 {
+    func midnight() -> NSDate?
+    {
+        let dayComponents = self.dayComponents()
+        
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let midnightComponents = NSDateComponents()
+        midnightComponents.second = 0
+        midnightComponents.minute = 0
+        midnightComponents.hour = 0
+        midnightComponents.day = dayComponents.day
+        midnightComponents.month = dayComponents.month
+        midnightComponents.year = dayComponents.year
+        return calendar?.dateFromComponents(midnightComponents)
+    }
+    
     func oneSecondBeforeMidnight() -> NSDate?
     {
         let todayComponents = self.dayComponents()
