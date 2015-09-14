@@ -33,6 +33,7 @@
 		AA6E1EFB1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EFA1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift */; settings = {ASSET_TAGS = (); }; };
 		AA6E1EFD1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EFC1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift */; settings = {ASSET_TAGS = (); }; };
 		AA6E1EFF1BA1CDD600CAB1BC /* IdeaFlowDataExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6E1EFE1BA1CDD600CAB1BC /* IdeaFlowDataExporter.swift */; settings = {ASSET_TAGS = (); }; };
+		AA9E53141BA39BEA00C68113 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA9E53131BA39BEA00C68113 /* iTunesArtwork@2x.png */; settings = {ASSET_TAGS = (); }; };
 		B7F2A7D67FD665E07D4455A0 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DC3E6F8B4DBB9D9AFBE3F6D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		AA6E1EFA1B9A7E7000CAB1BC /* IdeaFlowEvent+CreateDelete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+CreateDelete.swift"; sourceTree = "<group>"; };
 		AA6E1EFC1B9A7EB100CAB1BC /* IdeaFlowEvent+Previous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IdeaFlowEvent+Previous.swift"; sourceTree = "<group>"; };
 		AA6E1EFE1BA1CDD600CAB1BC /* IdeaFlowDataExporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdeaFlowDataExporter.swift; sourceTree = "<group>"; };
+		AA9E53131BA39BEA00C68113 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = SOURCE_ROOT; };
 		DDC5249FD4EEB0EDF331FD76 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 		84E245F51B7E74330042000D /* _Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AA9E53131BA39BEA00C68113 /* iTunesArtwork@2x.png */,
 				84E245F61B7E74330042000D /* Info.plist */,
 			);
 			name = "_Supporting Files";
@@ -294,6 +297,7 @@
 				84E245FF1B7E74330042000D /* Main.storyboard in Resources */,
 				84E246041B7E74330042000D /* LaunchScreen.xib in Resources */,
 				84E246011B7E74330042000D /* Images.xcassets in Resources */,
+				AA9E53141BA39BEA00C68113 /* iTunesArtwork@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

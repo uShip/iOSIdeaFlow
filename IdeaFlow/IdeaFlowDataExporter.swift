@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-private extension Int {
+private extension Int
+{
     func format(f: String) -> String
     {
         return NSString(format: "%\(f)d", self) as String
@@ -18,32 +19,7 @@ private extension Int {
 
 class IdeaFlowDataExporter
 {
-    var fileHandles = [String:NSFileHandle]()
-    
-    private func _getOrCreateHandleForFile(atPath filePath: String) -> NSFileHandle?
-    {
-        var fileHandle = fileHandles["\(filePath)"]
-        if fileHandle == nil
-        {
-            fileHandle = _createAndRememberHandleForFile(atPath: filePath)
-        }
-        return fileHandle
-    }
-    
-    private func _getPathForFileHandle(fileHandle: NSFileHandle?) -> String?
-    {
-        if let fileHandle = fileHandle
-        {
-            for (key,handle) in fileHandles
-            {
-                if handle == fileHandle
-                {
-                    return key
-                }
-            }
-        }
-        return nil
-    }
+    private var _fileHandles = [String:NSFileHandle]()
     
     func exportAll(completion: (() -> Void)?)
     {
@@ -56,7 +32,7 @@ class IdeaFlowDataExporter
                 _createFileIfNecessary(filePath)
             }
             
-            for (_, fileHandle) in fileHandles
+            for (_, fileHandle) in _fileHandles
             {
                 _truncateExistingFile(withHandle: fileHandle)
             }
@@ -67,7 +43,7 @@ class IdeaFlowDataExporter
                 _exportDate(date, completion:nil)
             }
             
-            for (_,fileHandle) in fileHandles
+            for (_,fileHandle) in _fileHandles
             {
                 fileHandle.closeFile()
             }
@@ -98,6 +74,31 @@ class IdeaFlowDataExporter
         }
         
         completion?()
+    }
+    
+    private func _getOrCreateHandleForFile(atPath filePath: String) -> NSFileHandle?
+    {
+        var fileHandle = _fileHandles["\(filePath)"]
+        if fileHandle == nil
+        {
+            fileHandle = _createAndRememberHandleForFile(atPath: filePath)
+        }
+        return fileHandle
+    }
+    
+    private func _getPathForFileHandle(fileHandle: NSFileHandle?) -> String?
+    {
+        if let fileHandle = fileHandle
+        {
+            for (key,handle) in _fileHandles
+            {
+                if handle == fileHandle
+                {
+                    return key
+                }
+            }
+        }
+        return nil
     }
     
     private func _documentsDirectoryPath() -> String
@@ -159,11 +160,11 @@ class IdeaFlowDataExporter
         if filemanager.fileExistsAtPath(filePath) == true
         {
             let fileHandle = NSFileHandle(forUpdatingAtPath: filePath)
-            if let oldFileHandle = fileHandles["\(filePath)"]
+            if let oldFileHandle = _fileHandles["\(filePath)"]
             {
                 oldFileHandle.closeFile()
             }
-            fileHandles["\(filePath)"] = fileHandle
+            _fileHandles["\(filePath)"] = fileHandle
             return fileHandle
         }
         return nil

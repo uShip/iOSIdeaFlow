@@ -120,6 +120,11 @@ class TabBarController : UITabBarController
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         IdeaFlowDataExporter().exportAll { [weak self] () -> () in
             MBProgressHUD.hideAllHUDsForView(self?.view, animated: true)
+            
+            let alertController = UIAlertController(title: "Export Complete", message: "Data has been exported to the app's Documents folder.  To access the files, connect to iTunes, view the device, select Apps, and select IdeaFlow under File Sharing.", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self?.presentViewController(alertController, animated: true, completion: nil)
+            
         }
     }
 }
