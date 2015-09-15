@@ -21,7 +21,7 @@ class IdeaFlowChartView2: UIView
     var lineWidth :CGFloat
     {
         get{
-            return fmin(centerPoint.x,centerPoint.y) - radiusInset
+            return 20//fmin(centerPoint.x,centerPoint.y) - radiusInset
         }
         
     }
