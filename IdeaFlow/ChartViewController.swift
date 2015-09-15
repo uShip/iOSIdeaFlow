@@ -21,6 +21,24 @@ class ChartViewController: UIViewController
         
         let longPresser = UILongPressGestureRecognizer(target: self, action: Selector("onLongPress:"))
         self.view.addGestureRecognizer(longPresser)
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: Selector("onLeftSwipe:"))
+        leftSwipe.direction = .Left
+        self.view.addGestureRecognizer(leftSwipe)
+        
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: Selector("onRightSwipe:"))
+        rightSwipe.direction = .Right
+        self.view.addGestureRecognizer(rightSwipe)
+    }
+    
+    func onLeftSwipe(gestureRecognizer: UISwipeGestureRecognizer)
+    {
+        goToNextDay(gestureRecognizer)
+    }
+    
+    func onRightSwipe(gestureRecognizer: UISwipeGestureRecognizer)
+    {
+        goToPreviousDay(gestureRecognizer)
     }
     
     func onLongPress(gestureRecognizer: UILongPressGestureRecognizer)

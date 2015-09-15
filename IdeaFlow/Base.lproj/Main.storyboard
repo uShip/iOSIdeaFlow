@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="15A263e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nES-Gf-tCn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nES-Gf-tCn">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -23,9 +23,12 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6S-sf-6Ed" userLabel="Previous Day">
-                                <rect key="frame" x="16" y="80" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6S-sf-6Ed" userLabel="Previous Day">
+                                <rect key="frame" x="0.0" y="80" width="46" height="476"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="m8K-K6-7Li"/>
+                                </constraints>
                                 <state key="normal" title="&lt;">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -33,8 +36,8 @@
                                     <action selector="goToPreviousDay:" destination="9pv-A4-QxB" eventType="touchUpInside" id="omN-Em-FH9"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLM-tA-2iQ" userLabel="Date">
-                                <rect key="frame" x="278.5" y="80" width="43" height="21.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLM-tA-2iQ" userLabel="Date">
+                                <rect key="frame" x="54" y="80" width="492" height="21.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -42,9 +45,12 @@
                                 <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7jg-gd-hKE" userLabel="Next Day">
-                                <rect key="frame" x="554" y="80" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7jg-gd-hKE" userLabel="Next Day">
+                                <rect key="frame" x="554" y="80" width="46" height="476"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="RQS-S2-axW"/>
+                                </constraints>
                                 <state key="normal" title="&gt;">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -57,14 +63,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="K6S-sf-6Ed" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="16" id="86e-IJ-d4N"/>
-                            <constraint firstItem="K6S-sf-6Ed" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" constant="16" id="CZf-pl-dtd"/>
+                            <constraint firstItem="K6S-sf-6Ed" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="CZf-pl-dtd"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="uTC-FJ-TdB" secondAttribute="bottom" id="DkD-tM-byh"/>
                             <constraint firstItem="7jg-gd-hKE" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="16" id="ThI-xO-7vE"/>
                             <constraint firstItem="KLM-tA-2iQ" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="16" id="Y4b-KH-m1Y"/>
                             <constraint firstItem="uTC-FJ-TdB" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="a9g-wu-HNH"/>
                             <constraint firstItem="uTC-FJ-TdB" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="aax-rB-Wmk"/>
+                            <constraint firstItem="KLM-tA-2iQ" firstAttribute="leading" secondItem="K6S-sf-6Ed" secondAttribute="trailing" constant="8" id="i2Z-L3-WuF"/>
+                            <constraint firstItem="7jg-gd-hKE" firstAttribute="leading" secondItem="KLM-tA-2iQ" secondAttribute="trailing" constant="8" id="i2g-aZ-9aV"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="7jg-gd-hKE" secondAttribute="bottom" id="iIb-C9-MKU"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="K6S-sf-6Ed" secondAttribute="bottom" id="imn-cM-AxO"/>
                             <constraint firstAttribute="centerX" secondItem="KLM-tA-2iQ" secondAttribute="centerX" id="reQ-ay-umN"/>
-                            <constraint firstAttribute="trailing" secondItem="7jg-gd-hKE" secondAttribute="trailing" constant="16" id="wB7-CN-rjO"/>
+                            <constraint firstAttribute="trailing" secondItem="7jg-gd-hKE" secondAttribute="trailing" id="wB7-CN-rjO"/>
                             <constraint firstAttribute="trailing" secondItem="uTC-FJ-TdB" secondAttribute="trailing" id="wDz-LO-iGw"/>
                         </constraints>
                     </view>
