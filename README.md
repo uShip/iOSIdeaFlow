@@ -1,9 +1,11 @@
 # iOSIdeaFlow
 
-<a href="https://github.com/uShip/iOSIdeaFlow/blob/XCode7-Beta6/screens/chart1.png"><img src="https://github.com/uShip/iOSIdeaFlow/blob/XCode7-Beta6/screens/chart1.png" width=320/></a>
-<a href="https://github.com/uShip/iOSIdeaFlow/blob/XCode7-Beta6/screens/chart2.png"><img src="https://github.com/uShip/iOSIdeaFlow/blob/XCode7-Beta6/screens/chart2.png" width=320/></a>
-<a href="https://github.com/uShip/iOSIdeaFlow/blob/XCode7-Beta6/screens/menu.png"><img src="https://github.com/uShip/iOSIdeaFlow/blob/XCode7-Beta6/screens/menu.png" width=320/></a>
-<a href="https://github.com/uShip/iOSIdeaFlow/blob/XCode7-Beta6/screens/table.png"><img src="https://github.com/uShip/iOSIdeaFlow/blob/XCode7-Beta6/screens/table.png" width=320/></a>
+IdeaFlow tracking tool based on a presentation by Janelle Klein (https://leanpub.com/ideaflow)
+
+<a href="https://github.com/uShip/iOSIdeaFlow/blob/master/screens/chart1.png"><img src="https://github.com/uShip/iOSIdeaFlow/blob/master/screens/chart1.png" width=320/></a>
+<a href="https://github.com/uShip/iOSIdeaFlow/blob/master/screens/chart2.png"><img src="https://github.com/uShip/iOSIdeaFlow/blob/master/screens/chart2.png" width=320/></a>
+<a href="https://github.com/uShip/iOSIdeaFlow/blob/master/screens/menu.png"><img src="https://github.com/uShip/iOSIdeaFlow/blob/master/screens/menu.png" width=320/></a>
+<a href="https://github.com/uShip/iOSIdeaFlow/blob/master/screens/table.png"><img src="https://github.com/uShip/iOSIdeaFlow/blob/master/screens/table.png" width=320/></a>
 
 
 icons from the 200 Outline Tonicons pack at
