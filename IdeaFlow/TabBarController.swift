@@ -21,7 +21,7 @@ class TabBarController : UITabBarController
         
         self.menuController = MenuController(presenter: self)
         
-        let button = UIBarButtonItem(title: "Add", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("addButtonTapped"))
+        let button = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("menuButtonTapped"))
         self.navigationItem.setRightBarButtonItem(button, animated: false)
         
         _observeNotifications()
@@ -91,7 +91,7 @@ class TabBarController : UITabBarController
     }
     
     
-    func addButtonTapped()
+    func menuButtonTapped()
     {
         menuController?.presentMenu()
     }
